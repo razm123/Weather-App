@@ -1,48 +1,29 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const isProduction = process.env.NODE_ENV === "production";
 
-const stylesHandler = "style-loader";
-
-const config = {
+module.exports = {
+    mode: "development",
     entry: "./src/index.js",
     output: {
-        path: path.resolve(__dirname, "./dist"),
+        path: path.resolve(__dirname, "dist"),
         filename: "main.js",
-        clean: true,
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "src/index.html",
-        }),
-    ],
-    // resolve: {
-    //     extensions: [".js", ".jsx", ".css"],
-    //     modulesDirectories: ["node_modules"],
-    // },
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, "dist"),
+        },
+        port: 3000,
+        open: true,
+        hot: true,
+        compress: true,
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/i,
-                loader: "babel-loader",
-            },
-            {
                 test: /\.css$/i,
-                use: [stylesHandler, "css-loader", "postcss-loader"],
-            },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: "asset",
+                include: path.resolve(__dirname, "src"),
+                use: ["style-loader", "css-loader", "postcss-loader"],
             },
         ],
     },
-};
-
-module.exports = () => {
-    if (isProduction) {
-        config.mode = "production";
-    } else {
-        config.mode = "development";
-    }
-    return config;
 };
