@@ -206,12 +206,6 @@ export function runAPI() {
                 locationsArray.push(oneRow);
             }
             suggBox.innerHTML = "";
-            // suggBox.classList.remove("hidden");
-            for (let i = 0; i < locationsArray.length; i++) {
-                const rowItem = document.createElement("li");
-                rowItem.textContent = locationsArray[i];
-                suggBox.append(rowItem);
-            }
             renderResults(locationsArray);
             clickList();
             //  = emptyArray;
@@ -223,12 +217,11 @@ function clickList() {
     const suggList = document.querySelectorAll(".autocom-box li");
     const suggBox = document.querySelector(".autocom-box");
 
-    console.log(suggList);
     suggList.forEach((list) => {
         list.addEventListener("click", async (e) => {
-            const cityInput2 = document.getElementById("city");
-            cityInput2.value = e.target.textContent;
-            const data = await fetchWeather(cityInput2.value, "forecast");
+            const cityInput = document.getElementById("city");
+            cityInput.value = e.target.textContent;
+            const data = await fetchWeather(cityInput.value, "forecast");
             getData(data);
             document.querySelector("form").reset();
             suggBox.classList.add("hidden");
@@ -238,7 +231,11 @@ function clickList() {
 
 function renderResults(results) {
     const suggBox = document.querySelector(".autocom-box");
-
+    for (let i = 0; i < results.length; i++) {
+        const rowItem = document.createElement("li");
+        rowItem.textContent = results[i];
+        suggBox.append(rowItem);
+    }
     if (!results.length) {
         return suggBox.classList.add("hidden");
     } else {
