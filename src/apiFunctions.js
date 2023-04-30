@@ -189,10 +189,11 @@ export function runAPI() {
     submitData();
     // document.querySelector(.)
     window.addEventListener("DOMContentLoaded", async () => {
+        suggBox.classList.add("hidden");
+
         const data = await fetchWeather("new york city", "forecast");
         getData(data);
         getCurrentWeather();
-        suggBox.classList.add("hidden");
     });
 
     cityInput.addEventListener("keyup", async (e) => {
