@@ -231,14 +231,17 @@ function clickList() {
 
 function renderResults(results) {
     const suggBox = document.querySelector(".autocom-box");
-    for (let i = 0; i < results.length; i++) {
-        const rowItem = document.createElement("li");
-        rowItem.textContent = results[i];
-        suggBox.append(rowItem);
-    }
+
     if (!results.length) {
         return suggBox.classList.add("hidden");
     } else {
+        for (let i = 0; i < results.length; i++) {
+            const rowItem = document.createElement("li");
+            rowItem.textContent = results[i];
+            suggBox.append(rowItem);
+        }
+        const div = document.querySelector(".jsonDATA");
+        div.textContent = "";
         return suggBox.classList.remove("hidden");
     }
 }
