@@ -14,9 +14,9 @@
 
     <body class="bg-white dark:bg-black m-0 p-0 w-full">
         <div class="container">
-            <nav class="flex w-screen items-center justify-between">
+            <header class="flex w-screen items-center justify-center relative">
                 <div class="emptyDiv"></div>
-
+                <!-- <div class="emptyDiv"></div> -->
                 <h1 class="heading">Weather App</h1>
                 <div class="units-theme-wrapper">
                     <label class="units-label">
@@ -54,7 +54,7 @@
                         </svg>
                     </button>
                 </div>
-            </nav>
+            </header>
 
             <form class="grid w-screen place-items-center">
                 <label for="default-search" class="search-form">Search</label>
@@ -78,8 +78,15 @@
             </form>
 
             <div class="jsonDATA"></div>
-            <img src="" alt="" />
-            Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+            <div class="testWrapper">
+                <img src="" alt="" />
+
+                <h1 class="cityName"></h1>
+                <div class="currentTemp text-center"></div>
+                <div class="currentTemp2"></div>
+                <div class="currentTemp3 text-center"></div>
+                <div>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></div>
+            </div>
         </div>
         <!-- <h1 class="text-3xl font-bold underline">Hello world!</h1> -->
     </body>
