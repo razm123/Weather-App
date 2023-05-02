@@ -60,10 +60,10 @@
     }
 
     .autocom-box {
-        @apply w-full bg-white dark:text-white list-none px-[10px] py-[8px] overflow-y-auto p-0 absolute;
+        @apply w-full bg-white dark:text-white list-none px-[10px] py-[8px] overflow-y-auto p-0 absolute dark:bg-gray-700 dark:border-gray-600;
     }
     .autocom-box li {
-        @apply hover:bg-[#efefef] px-[8px] py-[12px] w-full rounded-[3px] text-black cursor-pointer;
+        @apply hover:bg-[#efefef] px-[8px] py-[12px] w-full rounded-[3px] text-black cursor-pointer dark:text-white dark:hover:bg-gray-600;
     }
 
     .testWrapper {

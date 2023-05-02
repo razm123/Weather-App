@@ -1,49 +1,9 @@
-async function fetchWeather(city, forecast) {
-    try {
-        let data;
-        let response = await fetch(`https://api.weatherapi.com/v1/${forecast}.json?key=b35580b5b878478fba522539232904&q=${city}&days=3`, {
-            mode: "cors",
-        });
-        if (response.ok) {
-            data = await response.json();
-        } else {
-            throw new Error("Please enter a valid city name");
-        }
-        return data;
-    } catch (err) {
-        console.log("there was an error " + err);
-        const div = document.querySelector(".jsonDATA");
-        div.textContent = "Location not found";
-        // const img = document.querySelector("img");
-        // img.src = "";
-    }
-}
-
-async function fetchLocation(city) {
-    try {
-        let data;
-        let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
-            mode: "cors",
-        });
-        if (response.ok) {
-            data = await response.json();
-        } else {
-            throw new Error("Please enter a valid city name");
-        }
-        return data;
-    } catch (err) {
-        const suggBox = document.querySelector(".autocom-box");
-        suggBox.classList.add("hidden");
-        console.log("there was an error " + err);
-        const div = document.querySelector(".jsonDATA");
-        div.textContent = "Location not found";
-
-        // const img = document.querySelector("img");
-        // img.src = "";
-    }
-}
-
-function getData(data, weatherBoolean) {
+import { searchLocations } from "./API/searchBar";
+import { clickList } from "./API/searchBar";
+import { toggleUnits } from "./DOM/tempUnits";
+import { renderDOM } from "./DOM/tempUnits";
+import { fetchWeather } from "./API/weatherData";
+export function getData(data, weatherBoolean) {
     const div = document.querySelector(".jsonDATA");
     // div.textContent = data;
     const currentImg = data.current.condition.icon;
@@ -156,125 +116,40 @@ const nthNumber = (number) => {
     }
 };
 
-async function receiveData(city) {
-    const data = await fetchWeather(city, "forecast");
-    return data;
-}
+// async function receiveData(city) {
+//     const data = await fetchWeather(city, "forecast");
+//     return data;
+// }
 
 function submitData() {
     const cityInput = document.getElementById("city");
     const suggBox = document.querySelector(".autocom-box");
 
     document.querySelector("form").addEventListener("submit", async (e) => {
-        const weatherInput = document.getElementById("weatherUnits");
-
         e.preventDefault();
         const data = await fetchWeather(cityInput.value, "forecast");
         let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
         getData(data, weatherBoolean);
+        let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+        localStorage.setItem("currentCity", currentCity);
         document.querySelector("form").reset();
         suggBox.classList.add("hidden");
-        // weatherInput.checked = false;
     });
     clickList();
 }
 
-function clickList() {
-    const suggList = document.querySelectorAll(".autocom-box li");
-    const suggBox = document.querySelector(".autocom-box");
-    suggList.forEach((list) => {
-        list.addEventListener("click", async (e) => {
-            const weatherInput = document.getElementById("weatherUnits");
-
-            const cityInput = document.getElementById("city");
-            cityInput.value = e.target.textContent;
-            const data = await fetchWeather(cityInput.value, "forecast");
-            let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
-            console.log(weatherBoolean);
-            getData(data, weatherBoolean);
-            document.querySelector("form").reset();
-            suggBox.classList.add("hidden");
-            // weatherInput.checked = false;
-        });
-    });
-}
-
-function renderResults(results) {
-    const suggBox = document.querySelector(".autocom-box");
-
-    if (!results.length) {
-        return suggBox.classList.add("hidden");
-    } else {
-        for (let i = 0; i < results.length; i++) {
-            const rowItem = document.createElement("li");
-            rowItem.textContent = results[i];
-            suggBox.append(rowItem);
-        }
-        const div = document.querySelector(".jsonDATA");
-        div.textContent = "";
-        return suggBox.classList.remove("hidden");
-    }
-}
-
-// function toggleUnits()
-
-function toggleUnits() {
-    let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean")) || false;
-    localStorage.setItem("weatherBoolean", weatherBoolean);
-
-    const weatherInput = document.getElementById("weatherUnits");
-    weatherInput.addEventListener("click", async () => {
-        const cityName = document.querySelector(".cityName");
-        const data = await fetchWeather(cityName.textContent, "forecast");
-
-        if (weatherInput.checked) {
-            weatherBoolean = true;
-            localStorage.setItem("weatherBoolean", weatherBoolean);
-            getData(data, weatherBoolean);
-        } else {
-            weatherBoolean = false;
-            localStorage.setItem("weatherBoolean", weatherBoolean);
-
-            getData(data, weatherBoolean);
-        }
-    });
-    console.log(weatherBoolean);
-    return weatherBoolean;
-}
-
-function renderDOM() {
-    const suggBox = document.querySelector(".autocom-box");
-    suggBox.classList.add("hidden");
-    let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
-    let weatherUnits = document.getElementById("weatherUnits");
-    weatherUnits.checked = weatherBoolean;
-    return weatherBoolean;
-}
-
 export function runAPI() {
-    toggleUnits();
+    const suggBox = document.querySelector(".autocom-box");
     const cityInput = document.getElementById("city");
+
+    toggleUnits();
     submitData();
     window.addEventListener("DOMContentLoaded", async () => {
         let weatherBoolean = renderDOM();
-        const data = await fetchWeather("new york city", "forecast");
+        let currentCity = localStorage.getItem("currentCity") || "New York City";
+        const data = await fetchWeather(currentCity, "forecast");
         getData(data, weatherBoolean);
         getCurrentWeather();
     });
-
-    cityInput.addEventListener("keyup", async (e) => {
-        const autocomplete = await fetchLocation(e.target.value);
-        console.log(autocomplete);
-        let locationsArray = [];
-        if (cityInput.value.length) {
-            for (let i = 0; i < autocomplete.length; i++) {
-                let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
-                locationsArray.push(oneRow);
-            }
-            suggBox.innerHTML = "";
-            renderResults(locationsArray);
-            clickList();
-            //  = emptyArray;
-        }
-    });
+    searchLocations();
 }
