@@ -23,24 +23,17 @@ export function getData(data, weatherBoolean) {
     const currentTempDiv3 = document.querySelector(".currentTemp3");
     const cityName = document.querySelector(".cityName");
     // currentTempDiv.textContent = currentTemp + data.location.name;
-    cityName.textContent = data.location.name + ", " + data.location.region;
+    if (data.location.region != "") {
+        cityName.textContent = data.location.name + ", " + data.location.region;
+    } else {
+        cityName.textContent = data.location.name + ", " + data.location.country;
+    }
     currentTempDiv.textContent = `${printCurrentDay(data, 0, "forecast")}, ${currentTemp}${tempUnit}`;
     currentTempDiv2.textContent = printTempData(data, 1, weatherBoolean);
     currentTempDiv3.textContent = printTempData(data, 2, weatherBoolean);
     console.log(data);
     const img = document.querySelector("img");
     img.src = currentImg;
-    // console.log(JSON.parse(data));
-    // currentWeather(data);
-    // printTempData(data, 0);
-    // printTempData(data, 1);
-    // printTempData(data, 2);
-
-    // console.log(data.forecast.forecastday[0]);
-
-    // const date = new Date(`${data["location"]["forecast"]["forecastday"][0]}`);
-    // console.log(data)
-    // console.log(dt);
 }
 
 async function getCurrentWeather() {
@@ -130,6 +123,7 @@ function submitData() {
         const data = await fetchWeather(cityInput.value, "forecast");
         let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
         getData(data, weatherBoolean);
+
         let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
         localStorage.setItem("currentCity", currentCity);
         document.querySelector("form").reset();

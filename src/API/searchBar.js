@@ -58,15 +58,16 @@ export function renderResults(results) {
         return suggBox.classList.remove("hidden");
     }
 }
+let currentFocus;
 
 export function searchLocations() {
     const suggBox = document.querySelector(".autocom-box");
     const cityInput = document.getElementById("city");
-
-    cityInput.addEventListener("keyup", async (e) => {
+    cityInput.addEventListener("input", async (e) => {
         const autocomplete = await fetchLocation(e.target.value);
         console.log(autocomplete);
         let locationsArray = [];
+        currentFocus = -1;
         if (cityInput.value.length) {
             for (let i = 0; i < autocomplete.length; i++) {
                 let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
@@ -77,4 +78,49 @@ export function searchLocations() {
             clickList();
         }
     });
+    handleKeyboardNavigation();
+}
+
+function handleKeyboardNavigation() {
+    const cityInput = document.getElementById("city");
+
+    cityInput.addEventListener("keydown", (e) => {
+        let suggBox = document.querySelector(".autocom-box");
+        let listItems;
+        if (suggBox) {
+            listItems = document.querySelectorAll(".autocom-box li");
+        }
+        if (e.code == "ArrowDown") {
+            currentFocus++;
+            addActive(listItems);
+            console.log(listItems);
+            // Up
+        } else if (e.code == "ArrowUp") {
+            currentFocus--;
+            console.log(listItems);
+
+            addActive(listItems);
+        } else if (e.code == "Enter") {
+            if (currentFocus > -1) {
+                if (suggBox) listItems[currentFocus].click();
+            }
+        }
+    });
+}
+
+function addActive(suggBox) {
+    if (!suggBox) return false;
+
+    removeActive(suggBox);
+    if (currentFocus >= suggBox.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = suggBox.length - 1;
+
+    suggBox[currentFocus].classList.add("active");
+    console.log(suggBox);
+}
+
+function removeActive(suggBox) {
+    for (let i = 0; i < suggBox.length; i++) {
+        suggBox[i].classList.remove("active");
+    }
 }

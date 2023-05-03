@@ -65,8 +65,14 @@
     .autocom-box li {
         @apply hover:bg-[#efefef] px-[8px] py-[12px] w-full rounded-[3px] text-black cursor-pointer dark:text-white dark:hover:bg-gray-600;
     }
+    .autocom-box li.active {
+        @apply bg-[#efefef] dark:bg-gray-600;
+    }
 
     .testWrapper {
+        @apply flex flex-col w-screen items-center content-center dark:text-white;
+    }
+    .current-weather-wrapper {
         @apply flex flex-col w-screen items-center content-center dark:text-white;
     }
 }
