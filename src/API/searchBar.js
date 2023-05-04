@@ -165,7 +165,9 @@ function handleKeyboardNavigation() {
                 addActive(listItems);
             } else if (e.code == "Enter") {
                 if (currentFocus > -1) {
-                    if (suggBox) listItems[currentFocus].click();
+                    e.preventDefault();
+                    // let currentList = addActive(listItems);
+                    if (suggBox) list[currentFocus].click();
                 }
             }
         }, 0)
@@ -178,8 +180,11 @@ function addActive(listItems) {
     removeActive(listItems);
     if (currentFocus >= listItems.length) currentFocus = 0;
     if (currentFocus < 0) currentFocus = listItems.length - 1;
-
+    console.log(listItems[currentFocus]);
     listItems[currentFocus].classList.add("active");
+    let city = document.getElementById("city");
+    console.log(city);
+    city.value = listItems[currentFocus].textContent;
 }
 
 export function removeActive(listItems) {

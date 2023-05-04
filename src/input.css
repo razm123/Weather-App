@@ -75,4 +75,8 @@
     .current-weather-wrapper {
         @apply flex flex-col w-screen items-center content-center dark:text-white;
     }
+
+    /* body {
+        @apply bg-[url("images/1341348_6707.jpg")] bg-no-repeat bg-cover;
+    } */
 }
