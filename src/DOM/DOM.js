@@ -25,5 +25,6 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
 
 export function highlights(humidityData) {
     const humidity = document.getElementById("humidityText");
+    // test
     humidity.textContent = `${humidityData}%`;
 }
