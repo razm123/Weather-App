@@ -3,26 +3,28 @@ import { clickList } from "./API/searchBar";
 import { toggleUnits } from "./DOM/tempUnits";
 import { renderDOM } from "./DOM/tempUnits";
 import { fetchWeather } from "./API/weatherData";
+import { currentWidget } from "./DOM/DOM";
+import { highlights } from "./DOM/DOM";
 export function getData(data, weatherBoolean) {
     const div = document.querySelector(".jsonDATA");
     // div.textContent = data;
     const currentImg = data.current.condition.icon;
-    // let currentTemp = data.current.temp_f;
-    // const currentTemp = data.current.temp_f;
     let currentTemp;
     let tempUnit;
+    let feelslike;
     if (weatherBoolean) {
         currentTemp = Math.round(data.current.temp_c);
+        feelslike = Math.round(data.current.feelslike_c);
         tempUnit = "\xB0C";
     } else {
         currentTemp = Math.round(data.current.temp_f);
+        feelslike = Math.round(data.current.feelslike_f);
         tempUnit = "\xB0F";
     }
     const currentTempDiv = document.querySelector(".currentTemp");
     const currentTempDiv2 = document.querySelector(".currentTemp2");
     const currentTempDiv3 = document.querySelector(".currentTemp3");
     const cityName = document.querySelector(".cityName");
-    // currentTempDiv.textContent = currentTemp + data.location.name;
     if (data.location.region != "") {
         cityName.textContent = data.location.name + ", " + data.location.region;
     } else {
@@ -32,8 +34,8 @@ export function getData(data, weatherBoolean) {
     currentTempDiv2.textContent = printTempData(data, 1, weatherBoolean);
     currentTempDiv3.textContent = printTempData(data, 2, weatherBoolean);
     console.log(data);
-    const img = document.querySelector("img");
-    img.src = currentImg;
+    currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
+    getHighlightsData(data);
 }
 
 async function getCurrentWeather() {
@@ -51,6 +53,11 @@ function currentWeather(data) {
     let last_updated = data.current.last_updated;
     let temp_c = data.current.temp_c;
     console.log(`day: ${dayZero}, last updated: ${last_updated}, temperature: ${temp_c}\xB0C`);
+}
+
+function getHighlightsData(data) {
+    const humidityData = data.forecast.forecastday[0].day.avghumidity;
+    highlights(humidityData);
 }
 
 function printTempData(data, currentDayInt, weatherBoolean) {

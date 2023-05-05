@@ -10,6 +10,7 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     </head>
 
     <body class="bg-white dark:bg-black m-0 p-0 w-full">
@@ -58,15 +59,50 @@
 
             <div class="jsonDATA"></div>
             <div class="testWrapper">
-                <img src="" alt="" />
-
                 <h1 class="cityName"></h1>
                 <div class="currentTemp text-center"></div>
                 <div class="currentTemp2"></div>
                 <div class="currentTemp3 text-center"></div>
                 <div>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></div>
             </div>
-            <div class="current-weather-wrapper"></div>
+            <div class="current-weather-wrapper content-end">
+                <div class="today-weather bg-green-700 w-[30vw] h-full mr-5 rounded-lg flex flex-col gap-2">
+                    <div class="img-wrapper w-full flex justify-center">
+                        <img src="" alt="Current Weather" class="current-img" id="current-img" />
+                    </div>
+                    <h2 id="current-date" class="text-center"></h2>
+                    <h1 id="current-temp" class="text-center"></h1>
+                    <h2 id="current-condition" class="text-center"></h2>
+                    <div class="feels-like flex justify-center">
+                        <span class="material-symbols-rounded"> thermostat </span>
+                        <h2 id="current-feelslike" class="text-center"></h2>
+                    </div>
+                    <h2 id="last-updated" class="text-center"></h2>
+                </div>
+
+                <div class="today-highlights bg-red-700 w-[60vw] h-full rounded-lg">
+                    <h2 class="h-[30px] text-center font-medium text-xl">Today's highlights</h2>
+                    <div class="grid-wrapper grid grid-cols-4 m-auto gap-4 h-[calc(95%-30px)] w-[95%]">
+                        <div class="today-highlights-grid grid1 flex flex-col">
+                            <h2>Humidity</h2>
+                            <span class="material-symbols-rounded"> humidity_percentage </span>
+                            <p id="humidityText"></p>
+                        </div>
+                        <div class="today-highlights-grid grid2"></div>
+                        <div class="today-highlights-grid grid3">
+                            <i class="fa-solid fa-temperature-low fa-xl"></i>
+                        </div>
+                        <div class="today-highlights-grid grid4">
+                            <i class="fa-solid fa-temperature-high fa-xl"></i>
+                            <br />
+                        </div>
+                        <div class="today-highlights-grid grid5"></div>
+                        <div class="today-highlights-grid grid6"></div>
+                        <div class="today-highlights-grid grid7"></div>
+                        <div class="today-highlights-grid grid8"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- <h1 class="text-3xl font-bold underline">Hello world!</h1> -->
     </body>

@@ -73,7 +73,11 @@
         @apply flex flex-col w-screen items-center content-center dark:text-white;
     }
     .current-weather-wrapper {
-        @apply flex flex-col w-screen items-center content-center dark:text-white;
+        @apply flex w-screen dark:text-white h-[280px] justify-center;
+    }
+
+    .today-highlights-grid {
+        @apply bg-white text-black flex justify-center items-center rounded-lg;
     }
 
     /* body {
