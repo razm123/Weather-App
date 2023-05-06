@@ -2,10 +2,13 @@
 module.exports = {
     content: ["./dist/**/*.{html,js}", "./src/**/*.{html,js}"],
     darkMode: "class",
-
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                "black-rgba": "rgba(0, 0, 0, 0.54)",
+            },
+        },
     },
-
+    variants: {},
     plugins: [],
 };
