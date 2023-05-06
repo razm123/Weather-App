@@ -39,7 +39,7 @@
 
             <form class="grid w-screen place-items-center">
                 <label for="default-search" class="search-form">Search</label>
-                <div class="relative w-[80vw] rounded-[5px] shadow-[0px_1px_5px_3px_rgba(0,0,0,0.12)]" id="search-wrapper">
+                <div class="relative w-[80vw] shadow-[0px_1px_5px_3px_rgba(0,0,0,0.12)]" id="search-wrapper">
                     <input
                         type="search"
                         name="city"
@@ -58,11 +58,8 @@
             </form>
 
             <div class="jsonDATA"></div>
-            <div class="testWrapper">
+            <div class="headingWrapper">
                 <h1 class="cityName"></h1>
-                <div class="currentTemp text-center"></div>
-                <div class="currentTemp2"></div>
-                <div class="currentTemp3 text-center"></div>
                 <div>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></div>
             </div>
             <div class="current-weather-wrapper content-end">
@@ -77,29 +74,52 @@
                         <span class="material-symbols-rounded"> thermostat </span>
                         <h2 id="current-feelslike" class="text-center"></h2>
                     </div>
+                    <h2 class="text-center">Last updated:</h2>
                     <h2 id="last-updated" class="text-center"></h2>
                 </div>
 
                 <div class="today-highlights bg-red-700 w-[60vw] h-full rounded-lg">
                     <h2 class="h-[30px] text-center font-medium text-xl">Today's highlights</h2>
-                    <div class="grid-wrapper grid grid-cols-4 m-auto gap-4 h-[calc(95%-30px)] w-[95%]">
-                        <div class="today-highlights-grid grid1 flex flex-col">
-                            <h2>Humidity</h2>
-                            <span class="material-symbols-rounded"> humidity_percentage </span>
-                            <p id="humidityText"></p>
+                    <div class="grid-wrapper grid grid-cols-3 m-auto gap-4 h-[calc(95%-30px)] w-[95%] p-2">
+                        <div class="today-highlights-grid grid1">
+                            <h2 class="text-center">Humidity</h2>
+                            <div class="highlightGridWrapper">
+                                <span class="material-symbols-rounded text-center"> humidity_percentage </span>
+                                <p id="humidityText"></p>
+                            </div>
                         </div>
-                        <div class="today-highlights-grid grid2"></div>
+
+                        <div class="today-highlights-grid grid2">
+                            <h2 class="text-center">Low temp:</h2>
+                            <div class="highlightGridWrapper">
+                                <span class="text-center"><i class="fa-solid fa-temperature-low fa-xl"></i></span>
+                                <p id="lowTempText"></p>
+                            </div>
+                        </div>
                         <div class="today-highlights-grid grid3">
-                            <i class="fa-solid fa-temperature-low fa-xl"></i>
+                            <h2 class="text-center">High temp:</h2>
+                            <div class="highlightGridWrapper">
+                                <span class="text-center"><i class="fa-solid fa-temperature-high fa-xl"></i></span>
+                                <p id="highTempText"></p>
+                            </div>
                         </div>
                         <div class="today-highlights-grid grid4">
-                            <i class="fa-solid fa-temperature-high fa-xl"></i>
-                            <br />
+                            <h2 class="text-center">Wind Status</h2>
+                            <span class="material-symbols-rounded text-center"> air </span>
+                            <h2 id="windText"></h2>
                         </div>
-                        <div class="today-highlights-grid grid5"></div>
-                        <div class="today-highlights-grid grid6"></div>
-                        <div class="today-highlights-grid grid7"></div>
-                        <div class="today-highlights-grid grid8"></div>
+                        <div class="today-highlights-grid grid5">
+                            <h2 class="text-center">Sunrise</h2>
+
+                            <span class="material-symbols-rounded"> sunny </span>
+                            <p id="sunriseText"></p>
+                        </div>
+                        <div class="today-highlights-grid grid6">
+                            <h2 class="text-center">Sunset</h2>
+
+                            <span class="material-symbols-rounded"> nightlight </span>
+                            <p id="sunsetText"></p>
+                        </div>
                     </div>
                 </div>
             </div>
