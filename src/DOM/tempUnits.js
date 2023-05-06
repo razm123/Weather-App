@@ -16,7 +16,6 @@ export function toggleUnits() {
         } else {
             weatherBoolean = false;
             localStorage.setItem("weatherBoolean", weatherBoolean);
-
             getData(data, weatherBoolean);
         }
     });

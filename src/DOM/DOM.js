@@ -23,7 +23,18 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
     lastUpdate.textContent = data.current.last_updated;
 }
 
-export function highlights(humidityData) {
+export function highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset) {
     const humidity = document.getElementById("humidityText");
+    const lowTempText = document.getElementById("lowTempText");
+    const highTempText = document.getElementById("highTempText");
+    const windText = document.getElementById("windText");
+    const sunriseText = document.getElementById("sunriseText");
+    const sunsetText = document.getElementById("sunsetText");
+
     humidity.textContent = `${humidityData}%`;
+    lowTempText.textContent = `${lowTemp}${tempUnit}`;
+    highTempText.textContent = `${highTemp}${tempUnit}`;
+    windText.textContent = `${windStatus} ${windUnit}`;
+    sunriseText.textContent = sunrise;
+    sunsetText.textContent = sunset;
 }

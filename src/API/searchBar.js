@@ -49,6 +49,7 @@ export function clickList() {
 
 export function renderResults(results) {
     const suggBox = document.querySelector(".autocom-box");
+    let cityInput = document.getElementById("city");
 
     if (!results.length) {
         return suggBox.classList.add("hidden");
@@ -60,6 +61,9 @@ export function renderResults(results) {
         }
         const div = document.querySelector(".jsonDATA");
         div.textContent = "";
+        if (cityInput.value === "") {
+        } else {
+        }
         return suggBox.classList.remove("hidden");
     }
 }
@@ -67,16 +71,19 @@ let currentFocus;
 
 function clickOutsideEvent(e) {
     const suggBox = document.querySelector(".autocom-box");
+    let cityInput = document.getElementById("city");
+
     if (!e.target.closest(".autocom-box")) {
         suggBox.classList.add("hidden");
         let listItems = document.querySelectorAll(".autocom-box li");
         removeActive(listItems);
         currentFocus = -1;
     }
-    // if (e.target.closest("form")) {
-    //     console.log("test");
-    //     suggBox.classList.remove("hidden");
-    // }
+    if (e.target.closest("form")) {
+        if (cityInput.value != "" && cityInput.value != null && cityInput.value != "") {
+            suggBox.classList.remove("hidden");
+        }
+    }
 }
 
 export function clickOutsideSearch() {
@@ -93,9 +100,11 @@ export async function appendSuggestionList(e) {
     let locationsArray = [];
     currentFocus = -1;
     if (cityInput.value.length) {
-        for (let i = 0; i < autocomplete.length; i++) {
-            let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
-            locationsArray.push(oneRow);
+        if (autocomplete != undefined) {
+            for (let i = 0; i < autocomplete.length; i++) {
+                let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
+                locationsArray.push(oneRow);
+            }
         }
 
         suggBox.innerHTML = "";
@@ -163,13 +172,14 @@ function handleKeyboardNavigation() {
                 currentFocus--;
 
                 addActive(listItems);
-            } else if (e.code == "Enter") {
-                if (currentFocus > -1) {
-                    e.preventDefault();
-                    // let currentList = addActive(listItems);
-                    if (suggBox) list[currentFocus].click();
-                }
             }
+            // else if (e.code == "Enter") {
+            //     if (currentFocus > -1) {
+            //         // e.preventDefault();
+            //         // let currentList = addActive(listItems);
+            //         if (suggBox) listItems[currentFocus].click();
+            //     }
+            // }
         }, 0)
     );
 }

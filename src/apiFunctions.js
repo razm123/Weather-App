@@ -7,8 +7,6 @@ import { currentWidget } from "./DOM/DOM";
 import { highlights } from "./DOM/DOM";
 export function getData(data, weatherBoolean) {
     const div = document.querySelector(".jsonDATA");
-    // div.textContent = data;
-    const currentImg = data.current.condition.icon;
     let currentTemp;
     let tempUnit;
     let feelslike;
@@ -21,21 +19,9 @@ export function getData(data, weatherBoolean) {
         feelslike = Math.round(data.current.feelslike_f);
         tempUnit = "\xB0F";
     }
-    const currentTempDiv = document.querySelector(".currentTemp");
-    const currentTempDiv2 = document.querySelector(".currentTemp2");
-    const currentTempDiv3 = document.querySelector(".currentTemp3");
-    const cityName = document.querySelector(".cityName");
-    if (data.location.region != "") {
-        cityName.textContent = data.location.name + ", " + data.location.region;
-    } else {
-        cityName.textContent = data.location.name + ", " + data.location.country;
-    }
-    currentTempDiv.textContent = `${printCurrentDay(data, 0, "forecast")}, ${currentTemp}${tempUnit}`;
-    currentTempDiv2.textContent = printTempData(data, 1, weatherBoolean);
-    currentTempDiv3.textContent = printTempData(data, 2, weatherBoolean);
     console.log(data);
     currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
-    getHighlightsData(data);
+    getHighlightsData(data, weatherBoolean);
 }
 
 async function getCurrentWeather() {
@@ -55,9 +41,31 @@ function currentWeather(data) {
     console.log(`day: ${dayZero}, last updated: ${last_updated}, temperature: ${temp_c}\xB0C`);
 }
 
-function getHighlightsData(data) {
-    const humidityData = data.forecast.forecastday[0].day.avghumidity;
-    highlights(humidityData);
+function getHighlightsData(data, weatherBoolean) {
+    const dayZeroData = data.forecast.forecastday[0];
+    const humidityData = data.current.humidity;
+    let lowTemp;
+    let highTemp;
+    let tempUnit;
+    let windStatus;
+    let windUnit;
+    if (weatherBoolean) {
+        lowTemp = Math.round(dayZeroData.day.mintemp_c);
+        highTemp = Math.round(dayZeroData.day.maxtemp_c);
+        tempUnit = "\xB0C";
+        windStatus = data.current.wind_kph;
+        windUnit = "km/h";
+    } else {
+        lowTemp = Math.round(dayZeroData.day.mintemp_f);
+        highTemp = Math.round(dayZeroData.day.maxtemp_f);
+        tempUnit = "\xB0F";
+        windStatus = data.current.wind_mph;
+        windUnit = "mph";
+    }
+    const sunrise = dayZeroData.astro.sunrise;
+    const sunset = dayZeroData.astro.sunset;
+
+    highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset);
 }
 
 function printTempData(data, currentDayInt, weatherBoolean) {
