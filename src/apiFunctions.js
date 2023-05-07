@@ -103,7 +103,7 @@ function printCurrentDay(data, currentDayInt, forecastType) {
 
 function updateClock() {
     let now = new Date();
-    let time = now.toLocaleTimeString([], { hour12: false, hour: "2-digit", minute: "2-digit" });
+    let time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
     document.getElementById("current-time").textContent = time;
     setTimeout(updateClock, 60000);
 }
