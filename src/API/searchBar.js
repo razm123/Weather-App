@@ -31,6 +31,8 @@ async function awaitWeather(e) {
     let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
     getData(data, weatherBoolean);
     let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+    document.title = currentCity.split(",")[0] + " Weather";
+
     localStorage.setItem("currentCity", currentCity);
 
     document.querySelector("form").reset();
@@ -106,6 +108,8 @@ export async function appendSuggestionList(e) {
                 locationsArray.push(oneRow);
             }
         }
+        console.log(locationsArray);
+        console.log(autocomplete);
 
         suggBox.innerHTML = "";
         renderResults(locationsArray);
@@ -115,8 +119,6 @@ export async function appendSuggestionList(e) {
             list.removeEventListener("click", awaitWeather);
         });
         clickList();
-        locationsArray = [];
-        autocomplete = [];
     }
 }
 
@@ -127,7 +129,7 @@ export function searchLocations() {
         "input",
         debounce(function (e) {
             appendSuggestionList(e);
-        }, 0)
+        }, 50)
     );
     handleKeyboardNavigation();
 }

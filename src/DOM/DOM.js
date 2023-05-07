@@ -3,7 +3,7 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
     const cityName = document.querySelector(".cityName");
 
     const currentImgHtml = document.getElementById("current-img");
-    const currentDate = document.getElementById("current-date");
+    const currentDate = document.getElementById("current-day");
     const currentTempHtml = document.getElementById("current-temp");
     const currentCondition = document.getElementById("current-condition");
     const currentFeelsLike = document.getElementById("current-feelslike");
@@ -20,7 +20,35 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
     currentTempHtml.textContent = currentTemp + tempUnit;
     currentCondition.textContent = data.current.condition.text;
     currentFeelsLike.textContent = `Feels like: ${feelslike}${tempUnit}`;
-    lastUpdate.textContent = data.current.last_updated;
+    lastUpdate.textContent = `Updated: ${data.current.last_updated}`;
+}
+
+export function dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, currentDay, currentDayInt) {
+    // const cityName = document.querySelector(".cityName");
+    let currentDayString;
+    switch (currentDayInt) {
+        case 0:
+            currentDayString = "one";
+            break;
+        case 1:
+            currentDayString = "two";
+            break;
+        case 2:
+            currentDayString = "three";
+            break;
+    }
+    const currentImgHtml = document.getElementById(`current-img-${currentDayString}`);
+    const currentDate = document.getElementById(`current-day-${currentDayString}`);
+    const currentTempHtml = document.getElementById(`current-temp-${currentDayString}`);
+    const currentCondition = document.getElementById(`current-condition-${currentDayString}`);
+    const precipitation = document.getElementById(`precipitation-${currentDayString}`);
+    const currentImg = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.icon;
+
+    currentImgHtml.src = currentImg;
+    currentDate.textContent = currentDay;
+    currentTempHtml.textContent = `${dailyTempMax}\xB0/${dailyTempMin}${tempUnit}`;
+    precipitation.textContent = "Precipitation: " + data.forecast.forecastday[parseInt(currentDayInt)].day.daily_chance_of_rain + "%";
+    currentCondition.textContent = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.text;
 }
 
 export function highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset) {
