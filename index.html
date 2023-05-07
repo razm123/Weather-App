@@ -39,7 +39,7 @@
 
             <form class="grid w-screen place-items-center">
                 <label for="default-search" class="search-form">Search</label>
-                <div class="relative w-[80vw] shadow-[0px_1px_5px_3px_rgba(0,0,0,0.12)]" id="search-wrapper">
+                <div class="relative w-[80vw] shadow-[0px_1px_5px_3px_rgba(0,0,0,0.12)] rounded-3xl" id="search-wrapper">
                     <input
                         type="search"
                         name="city"
@@ -62,12 +62,9 @@
                 <h1 class="cityName"></h1>
             </div>
             <div class="current-weather-wrapper gap-4" id="current-weather-wrapper">
-                <div
-                    class="today-weather bg-gradient-to-br from-[#1e2729] to-[#3d7eaa] w-[80vw] h-[270px] rounded-2xl flex flex-col gap-2 sm:w-[30vw]"
-                    id="today-weather"
-                >
+                <div class="today-weather widgetColor w-[80vw] h-[270px] rounded-2xl flex flex-col gap-2 sm:w-[30vw]" id="today-weather">
                     <div class="img-wrapper w-full flex justify-center">
-                        <img src="" alt="Current Weather" class="current-img scale-125" id="current-img" />
+                        <img src="" alt="Current Weather" class="current-img scale-100" id="current-img" />
                     </div>
                     <h2 id="current-date" class="text-center"></h2>
                     <h1 id="current-temp" class="text-center"></h1>
@@ -79,11 +76,8 @@
                     <h2 class="text-center">Last updated:</h2>
                     <h2 id="last-updated" class="text-center"></h2>
                 </div>
-                <div class="bg-gradient-to-tl from-[#1e2729] to-[#3d7eaa]"></div>
-                <div
-                    class="today-highlights bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-[#3d7eaa] via-[#535f6a] to-black w-[80vw] h-full rounded-2xl sm:w-[60vw] sm:h-[270px]"
-                    id="today-highlights"
-                >
+                <!-- <div class="bg-gradient-to-tl from-[#1e2729] to-[#3d7eaa]"></div> -->
+                <div class="today-highlights widgetColor w-[80vw] h-full rounded-2xl sm:w-[60vw] sm:h-[270px]" id="today-highlights">
                     <h2 class="h-[30px] text-center font-medium text-xl">Today's highlights</h2>
                     <div class="grid-wrapper grid grid-cols-3 m-auto gap-4 h-[calc(95%-30px)] w-[95%] p-2">
                         <div class="today-highlights-grid grid1">
