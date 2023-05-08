@@ -7,6 +7,7 @@ import { currentWidget } from "./DOM/DOM";
 import { highlights } from "./DOM/DOM";
 import { dailyWidget } from "./DOM/DOM";
 
+import { getHourlyData } from "./API/getHourlyData";
 // function getdailyTempMin(data, currDay, weatherBoolean) {
 //     let dailyTempMin;
 //     if (weatherBoolean) {
@@ -44,11 +45,13 @@ export function getData(data, weatherBoolean) {
         tempUnit = "\xB0F";
     }
     console.log(data);
-    currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
     for (let i = 0; i <= 2; i++) {
         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);
+        getHourlyData(data, weatherBoolean, i);
     }
+    currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
+
     getHighlightsData(data, weatherBoolean);
 }
 
@@ -108,7 +111,7 @@ function updateClock() {
     setTimeout(updateClock, 60000);
 }
 
-const nthNumber = (number) => {
+export const nthNumber = (number) => {
     if (number > 3 && number < 21) return "th";
     switch (number % 10) {
         case 1:
@@ -141,6 +144,9 @@ function submitData() {
     });
     clickList();
 }
+
+// Function to refresh data based on selected interval
+function refreshData() {}
 
 export function runAPI() {
     updateClock();
