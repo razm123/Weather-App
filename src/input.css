@@ -121,6 +121,11 @@
     .time-container p {
         @apply mr-5;
     }
+    #daily-0,
+    #daily-1,
+    #daily-2 {
+        @apply cursor-pointer;
+    }
 
     /* ::-webkit-scrollbar {
         @apply w-12;
