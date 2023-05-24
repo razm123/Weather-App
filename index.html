@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div id="daily-weather-wrapper" class="gap-4">
-                <div class="daily-widget" id="daily-one">
+                <div class="daily-widget" id="daily-0">
                     <h2 id="current-day-one" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
                     <h2 id="current-month-one" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="daily-widget" id="daily-two">
+                <div class="daily-widget" id="daily-1">
                     <h2 id="current-day-two" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
                     <h2 id="current-month-two" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="daily-widget" id="daily-three">
+                <div class="daily-widget" id="daily-2">
                     <h2 id="current-day-three" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
                     <h2 id="current-month-three" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
@@ -178,6 +178,52 @@
             <div class="dark:text-white w-screen flex justify-center">
                 Powered by <a href="https://www.weatherapi.com/" title="Free Weather API"> &nbsp;WeatherAPI.com</a>
             </div>
+
+            <div class="carousel-container overflow-x-scroll w-screen">
+                <div class="carousel flex w-[screen] dark:text-white">
+                    <!-- Array of weather data divs -->
+                    <div class="weather-data w-full">
+                        <h1 id="hourlyHeading" class="w-full text-center"></h1>
+                        <div
+                            class="hourly-container scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-blue-800 scrollbar-track-gray-200 dark:scrollbar-track-gray-700"
+                        ></div>
+                    </div>
+                    <div class="weather-data flex items-center"></div>
+                    <div class="weather-data mr-[10px]"></div>
+
+                    <!-- Add more weather data divs as needed -->
+                </div>
+            </div>
+            <!-- <script>
+                // Get the carousel container and the carousel itself
+                const carouselContainer = document.querySelector(".carousel-container");
+                const carousel = document.querySelector(".carousel");
+
+                // Scroll the carousel to the left
+                const scrollLeft = () => {
+                    carousel.scrollBy({
+                        left: -carouselContainer.offsetWidth,
+                        behavior: "smooth",
+                    });
+                };
+
+                // Scroll the carousel to the right
+                const scrollRight = () => {
+                    carousel.scrollBy({
+                        left: carouselContainer.offsetWidth,
+                        behavior: "smooth",
+                    });
+                };
+
+                // Add event listeners to arrow keys
+                document.addEventListener("keydown", (event) => {
+                    if (event.key === "ArrowLeft") {
+                        scrollLeft();
+                    } else if (event.key === "ArrowRight") {
+                        scrollRight();
+                    }
+                });
+            </script> -->
         </div>
         <!-- <h1 class="text-3xl font-bold underline">Hello world!</h1> -->
     </body>
