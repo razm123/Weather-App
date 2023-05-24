@@ -108,7 +108,7 @@
     } */
 
     .hourly-flex-container {
-        @apply flex flex-nowrap overflow-x-auto gap-20;
+        @apply flex flex-nowrap overflow-x-auto gap-16;
     }
 
     .hourly-data-item {
