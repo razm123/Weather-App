@@ -105,4 +105,49 @@
     /* body {
         @apply bg-[url("images/1341348_6707.jpg")] bg-no-repeat bg-cover;
     } */
+
+    .hourly-flex-container {
+        @apply flex flex-nowrap overflow-x-auto gap-20;
+    }
+
+    .hourly-data-item {
+        @apply flex-[0_0_auto];
+    }
+
+    .time-container {
+        @apply flex items-center;
+    }
+
+    .time-container p {
+        @apply mr-5;
+    }
+
+    /* ::-webkit-scrollbar {
+        @apply w-12;
+    } */
+    /* *::-webkit-scrollbar-track {
+        @apply bg-orange-300;
+    } */
+
+    /* ::-webkit-scrollbar-thumb:horizontal {
+        @apply dark:bg-white-rgba bg-black-rgba;
+    } */
 }
+
+/* * {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+}
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    border: 3px solid orange;
+} */
