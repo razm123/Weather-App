@@ -79,7 +79,8 @@
     .current-weather-wrapper {
         @apply flex flex-col w-screen items-center justify-center dark:text-white  sm:flex-row sm:mt-0 sm:justify-center sm:items-center sm:content-center;
     }
-
+    .current-time {
+    }
     .today-highlights-grid {
         @apply bg-[rgba(255,255,255)]/50 dark:bg-black-rgba  text-[#1b1b1c] dark:text-white flex flex-col justify-center items-center rounded-2xl p-1;
     }

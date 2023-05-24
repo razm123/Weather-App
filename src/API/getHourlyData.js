@@ -31,22 +31,26 @@ export function getHourlyData(data, weatherBoolean, currDay) {
     let hourlyObject = {};
     let hourlyTempArray = [];
     let hourlyTimeArray = [];
+    let hourlyIconArray = [];
     let currentTempUnit;
     for (let i = 0; i < hourlyTempStart.length; i++) {
         let hourlyTemp = weatherBoolean ? hourlyTempStart[i].temp_c : hourlyTempStart[i].temp_f;
         currentTempUnit = weatherBoolean ? "\xB0C" : "\xB0F";
         let hourlyTime = new Date(hourlyTempStart[i].time).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+        let hourlyIcon = hourlyTempStart[i].condition.icon;
         hourlyTempArray.push(Math.floor(hourlyTemp) + " " + currentTempUnit);
         hourlyTimeArray.push(hourlyTime);
+        hourlyIconArray.push(hourlyIcon);
     }
 
     hourlyObject["temp"] = hourlyTempArray;
     hourlyObject["time"] = hourlyTimeArray;
+    hourlyObject["icon"] = hourlyIconArray;
     hourlyObject["day"] = currDay;
     let hourlyDate = data.forecast.forecastday[currDay].date;
     let dateFormatted = new Date(hourlyDate).toDateString({ month: "long", day: "numeric" });
     hourlyObject["date"] = hourlyDate;
-    console.log(hourlyDate);
+    console.log(hourlyObject);
     return hourlyObject;
 }
 
@@ -65,9 +69,12 @@ export function displayHourlyData(hourlyData, currentDay) {
     for (let i = 0; i < hourlyData.temp.length; i++) {
         const hourlyTemp = hourlyData.temp[i];
         const hourlyTime = hourlyData.time[i];
+        const hourlyIcon = hourlyData.icon[i];
         const hourlyDiv = document.createElement("div");
         hourlyDiv.classList.add("hourly-data-item");
 
+        const iconContainer = document.createElement("img");
+        iconContainer.src = hourlyIcon;
         const timeParagraph = document.createElement("p");
         timeParagraph.textContent = hourlyTime;
 
@@ -82,6 +89,7 @@ export function displayHourlyData(hourlyData, currentDay) {
         // Append a space between the time and "AM/PM" indicator
         timeContainer.appendChild(document.createTextNode(" "));
 
+        hourlyDiv.appendChild(iconContainer);
         hourlyDiv.appendChild(timeContainer);
         hourlyDiv.appendChild(tempParagraph);
 

@@ -93,6 +93,10 @@ export function getData(data, weatherBoolean) {
         tempUnit = "\xB0F";
     }
     console.log(data);
+    const hourlyData_zero = getHourlyData(data, weatherBoolean, 0);
+    const day_zero = document.querySelector(`#daily-0 h2`).textContent;
+    printCurrentDay(data, 0, "forecast");
+    displayHourlyData(hourlyData_zero, printCurrentDay(data, 0, "forecast"));
     for (let i = 0; i <= 2; i++) {
         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);

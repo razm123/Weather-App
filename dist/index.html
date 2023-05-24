@@ -63,7 +63,7 @@
             </div>
             <div class="current-weather-wrapper gap-4" id="current-weather-wrapper">
                 <div class="today-weather widgetColor w-[80vw] h-[270px] rounded-2xl flex flex-col gap-2 sm:w-[30vw]" id="today-weather">
-                    <div id="headerWrapper" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba flex justify-between px-5">
+                    <div id="headerWrapper" class="text-lg sm:text-lg md:text-2xl border-b-2 border-black-rgba flex justify-between px-5">
                         <h2 id="current-day" class=""></h2>
                         <h2 id="current-time"></h2>
                     </div>
@@ -175,10 +175,6 @@
                 </div>
             </div>
 
-            <div class="dark:text-white w-screen flex justify-center">
-                Powered by <a href="https://www.weatherapi.com/" title="Free Weather API"> &nbsp;WeatherAPI.com</a>
-            </div>
-
             <div class="carousel-container overflow-x-scroll w-screen">
                 <div class="carousel flex w-[screen] dark:text-white">
                     <!-- Array of weather data divs -->
@@ -192,6 +188,10 @@
                     <div class="weather-data mr-[10px]"></div>
 
                     <!-- Add more weather data divs as needed -->
+                </div>
+                <div class="dark:text-white w-screen flex justify-center">
+                    Powered by
+                    <a href="https://www.weatherapi.com/" title="Free Weather API" class="text-blue-500 underline"> &nbsp;WeatherAPI.com</a>
                 </div>
             </div>
             <!-- <script>
