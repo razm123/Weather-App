@@ -1,24 +1,68 @@
 // Fetch the location to autocomplete search bar locations
 import { fetchWeather } from "./weatherData";
 import { getData } from "../apiFunctions";
+// export async function fetchLocation(city) {
+//     try {
+//         let data;
+//         let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
+//             mode: "cors",
+//         });
+//         if (response.ok) {
+//             data = await response.json();
+//         } else {
+//             throw new Error("Please enter a valid city name");
+//         }
+//         return data;
+//     } catch (err) {
+//         const suggBox = document.querySelector(".autocom-box");
+//         suggBox.classList.add("hidden");
+//         console.log("there was an error " + err);
+//         const div = document.querySelector(".jsonDATA");
+//         div.textContent = "Location not found";
+//     }
+// }
+
+// export async function fetchLocation(city) {
+//     try {
+//         const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
+//             mode: "cors",
+//         });
+
+//         if (!response.ok) {
+//             throw new Error("Please enter a valid city name");
+//         }
+
+//         const data = await response.json();
+//         return data;
+//     } catch (err) {
+//         const suggBox = document.querySelector(".autocom-box");
+//         suggBox.classList.add("hidden");
+//         console.log("there was an error: " + err);
+//         const div = document.querySelector(".jsonDATA");
+//         div.textContent = "Location not found";
+//         throw err; // Rethrow the error to propagate it to the caller
+//     }
+// }
+
 export async function fetchLocation(city) {
     try {
-        let data;
-        let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
+        const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
             mode: "cors",
         });
-        if (response.ok) {
-            data = await response.json();
-        } else {
+
+        if (!response.ok) {
             throw new Error("Please enter a valid city name");
         }
+
+        const data = await response.json();
         return data;
     } catch (err) {
         const suggBox = document.querySelector(".autocom-box");
         suggBox.classList.add("hidden");
-        console.log("there was an error " + err);
+        console.log("there was an error: " + err);
         const div = document.querySelector(".jsonDATA");
         div.textContent = "Location not found";
+        throw err; // Rethrow the error to propagate it to the caller
     }
 }
 
@@ -39,14 +83,25 @@ async function awaitWeather(e) {
     suggBox.classList.add("hidden");
 }
 
+// export function clickList() {
+//     const suggList = document.querySelectorAll(".autocom-box li");
+//     const suggBox = document.querySelector(".autocom-box");
+//     suggList.forEach((list) => {
+//         list.addEventListener("click", awaitWeather);
+//     });
+//     // hideOnOutsideClick();
+//     const searchInput = document.querySelector("form");
+// }
 export function clickList() {
     const suggList = document.querySelectorAll(".autocom-box li");
     const suggBox = document.querySelector(".autocom-box");
+
     suggList.forEach((list) => {
         list.addEventListener("click", awaitWeather);
     });
-    // hideOnOutsideClick();
-    const searchInput = document.querySelector("form");
+
+    // Attach clickOutsideEvent listener to the window
+    clickOutsideSearch();
 }
 
 export function renderResults(results) {
@@ -93,6 +148,35 @@ export function clickOutsideSearch() {
     window.addEventListener("click", clickOutsideEvent);
 }
 
+// export async function appendSuggestionList(e) {
+//     const cityInput = document.getElementById("city");
+//     const suggBox = document.querySelector(".autocom-box");
+//     let autocomplete;
+//     autocomplete = [];
+//     autocomplete = await fetchLocation(e.target.value);
+//     let locationsArray = [];
+//     currentFocus = -1;
+//     if (cityInput.value.length) {
+//         if (autocomplete != undefined) {
+//             for (let i = 0; i < autocomplete.length; i++) {
+//                 let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
+//                 locationsArray.push(oneRow);
+//             }
+//         }
+//         console.log(locationsArray);
+//         console.log(autocomplete);
+
+//         suggBox.innerHTML = "";
+//         renderResults(locationsArray);
+//         const suggList = document.querySelectorAll(".autocom-box li");
+
+//         suggList.forEach((list) => {
+//             list.removeEventListener("click", awaitWeather);
+//         });
+//         clickList();
+//     }
+// }
+
 export async function appendSuggestionList(e) {
     const cityInput = document.getElementById("city");
     const suggBox = document.querySelector(".autocom-box");
@@ -100,26 +184,27 @@ export async function appendSuggestionList(e) {
     autocomplete = [];
     autocomplete = await fetchLocation(e.target.value);
     let locationsArray = [];
-    currentFocus = -1;
-    if (cityInput.value.length) {
-        if (autocomplete != undefined) {
-            for (let i = 0; i < autocomplete.length; i++) {
-                let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
-                locationsArray.push(oneRow);
-            }
+
+    if (autocomplete != undefined) {
+        for (let i = 0; i < autocomplete.length; i++) {
+            let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
+            locationsArray.push(oneRow);
         }
-        console.log(locationsArray);
-        console.log(autocomplete);
-
-        suggBox.innerHTML = "";
-        renderResults(locationsArray);
-        const suggList = document.querySelectorAll(".autocom-box li");
-
-        suggList.forEach((list) => {
-            list.removeEventListener("click", awaitWeather);
-        });
-        clickList();
     }
+
+    const MAX_SUGGESTIONS = 5; // Maximum number of suggestions to display
+    locationsArray = locationsArray.slice(0, MAX_SUGGESTIONS); // Limit the suggestions
+
+    suggBox.innerHTML = "";
+    renderResults(locationsArray);
+
+    const suggList = document.querySelectorAll(".autocom-box li");
+
+    suggList.forEach((list) => {
+        list.removeEventListener("click", awaitWeather);
+    });
+
+    clickList(); // Call clickList function after appending suggestions
 }
 
 export function searchLocations() {

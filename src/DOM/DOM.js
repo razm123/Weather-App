@@ -9,6 +9,7 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
     const currentFeelsLike = document.getElementById("current-feelslike");
     const lastUpdate = document.getElementById("last-updated");
     const currentImg = data.current.condition.icon;
+    const currentConditionText = data.current.condition.text;
     if (data.location.region != "") {
         cityName.textContent = data.location.name + ", " + data.location.region;
     } else {
@@ -16,6 +17,7 @@ export function currentWidget(data, currentTemp, tempUnit, feelslike, currentDay
     }
 
     currentImgHtml.src = currentImg;
+    currentImgHtml.alt = currentConditionText;
     currentDate.textContent = currentDay;
     currentTempHtml.textContent = currentTemp + tempUnit;
     currentCondition.textContent = data.current.condition.text;
@@ -43,9 +45,15 @@ export function dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, currentD
     const currentCondition = document.getElementById(`current-condition-${currentDayString}`);
     const precipitation = document.getElementById(`precipitation-${currentDayString}`);
     const currentImg = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.icon;
+    const currentConditionText = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.text;
 
     currentImgHtml.src = currentImg;
-    currentDate.textContent = currentDay;
+    currentImgHtml.alt = currentConditionText;
+    if (currentDayInt === 0) {
+        currentDate.textContent = "Today";
+    } else {
+        currentDate.textContent = currentDay;
+    }
     currentTempHtml.textContent = `${dailyTempMax}\xB0/${dailyTempMin}${tempUnit}`;
     precipitation.textContent = "Precipitation: " + data.forecast.forecastday[parseInt(currentDayInt)].day.daily_chance_of_rain + "%";
     currentCondition.textContent = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.text;

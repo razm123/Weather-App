@@ -96,7 +96,7 @@ export function getData(data, weatherBoolean) {
     const hourlyData_zero = getHourlyData(data, weatherBoolean, 0);
     const day_zero = document.querySelector(`#daily-0 h2`).textContent;
     printCurrentDay(data, 0, "forecast");
-    displayHourlyData(hourlyData_zero, printCurrentDay(data, 0, "forecast"));
+    displayHourlyData(hourlyData_zero, printCurrentDay(data, 0, "forecast"), 0);
     for (let i = 0; i <= 2; i++) {
         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);
@@ -106,9 +106,15 @@ export function getData(data, weatherBoolean) {
         // Add event listener to each daily div
         dailyDiv.addEventListener("click", (event) => {
             event.stopPropagation(); // Prevent click event from bubbling up to parent elements
-            displayHourlyData(hourlyData, currentDay);
+            displayHourlyData(hourlyData, currentDay, i);
         });
     }
+    const currentWeatherWrapper = document.getElementById("current-weather-wrapper");
+    const todayHourlyData = getHourlyData(data, weatherBoolean, 0);
+
+    currentWeatherWrapper.addEventListener("click", (eve) => {
+        displayHourlyData(todayHourlyData, "Today", 0);
+    });
     currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
 
     getHighlightsData(data, weatherBoolean);
@@ -333,6 +339,8 @@ export function runAPI() {
         const data = await fetchWeather(currentCity, "forecast");
         document.title = currentCity.split(",")[0] + " Weather";
         getData(data, weatherBoolean);
+        const currentTest = await fetchWeather(currentCity, "current");
+        console.log(currentTest);
         // getCurrentWeather();
     });
     searchLocations();
