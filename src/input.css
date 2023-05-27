@@ -97,7 +97,7 @@
     }
 
     #daily-weather-wrapper {
-        @apply flex flex-col sm:flex-row w-screen items-center justify-center dark:text-white sm:flex-row sm:justify-center sm:items-center sm:content-center mt-4 sm:mt-4;
+        @apply flex flex-col sm:flex-row w-screen items-center justify-center dark:text-white sm:justify-center sm:items-center sm:content-center mt-4 sm:mt-4;
     }
 
     .daily-widget {
@@ -130,8 +130,9 @@
     }
     #daily-0,
     #daily-1,
-    #daily-2 {
-        @apply cursor-pointer;
+    #daily-2,
+    #today-weather {
+        @apply cursor-pointer hover:scale-110 hover:border-solid hover:border-2 hover:border-black-rgba dark:hover:border-white-rgba;
     }
     .hourly-data-item img {
         @apply text-center;
