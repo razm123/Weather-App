@@ -115,7 +115,7 @@ export function getData(data, weatherBoolean) {
     const todayWeather = document.getElementById("today-weather");
     const todayHourlyData = getHourlyData(data, weatherBoolean, 0);
 
-    todayWeather.addEventListener("click", (eve) => {
+    todayWeather.addEventListener("click", () => {
         displayHourlyData(todayHourlyData, "Today", 0);
         getHighlightsData(data, weatherBoolean, 0, "Today");
     });
