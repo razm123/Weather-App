@@ -97,69 +97,30 @@ export function getData(data, weatherBoolean) {
     const day_zero = document.querySelector(`#daily-0 h2`).textContent;
     printCurrentDay(data, 0, "forecast");
     displayHourlyData(hourlyData_zero, printCurrentDay(data, 0, "forecast"), 0);
+    getHighlightsData(data, weatherBoolean, 0, "Today");
     for (let i = 0; i <= 2; i++) {
         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);
         const hourlyData = getHourlyData(data, weatherBoolean, i);
         const dailyDiv = document.getElementById(`daily-${i}`);
         const currentDay = document.querySelector(`#daily-${i} h2`).textContent;
+        const dailyDivHeading = document.querySelector(`#daily-${i} h2`);
         // Add event listener to each daily div
         dailyDiv.addEventListener("click", (event) => {
             event.stopPropagation(); // Prevent click event from bubbling up to parent elements
             displayHourlyData(hourlyData, currentDay, i);
+            getHighlightsData(data, weatherBoolean, i, dailyDivHeading.textContent);
         });
     }
-    const currentWeatherWrapper = document.getElementById("current-weather-wrapper");
+    const todayWeather = document.getElementById("today-weather");
     const todayHourlyData = getHourlyData(data, weatherBoolean, 0);
 
-    currentWeatherWrapper.addEventListener("click", (eve) => {
+    todayWeather.addEventListener("click", (eve) => {
         displayHourlyData(todayHourlyData, "Today", 0);
+        getHighlightsData(data, weatherBoolean, 0, "Today");
     });
     currentWidget(data, currentTemp, tempUnit, feelslike, printCurrentDay(data, 0, "forecast"));
-
-    getHighlightsData(data, weatherBoolean);
 }
-
-// Function to display hourly data
-// function displayHourlyData(hourlyData) {
-//     const hourlyContainer = document.querySelector(".hourly-container");
-
-//     // Clear the existing hourly data
-//     hourlyContainer.innerHTML = "";
-
-//     // Create a flex container to hold the hourly data items
-//     const flexContainer = document.createElement("div");
-//     flexContainer.classList.add("hourly-flex-container");
-
-//     // Loop through the hourlyData and create divs to display the data
-//     for (let i = 0; i < hourlyData.temp.length; i++) {
-//         const hourlyTemp = hourlyData.temp[i];
-//         const hourlyTime = hourlyData.time[i];
-
-//         const hourlyDiv = document.createElement("div");
-//         hourlyDiv.classList.add("hourly-data-item");
-
-//         const contentWrapper = document.createElement("div");
-//         contentWrapper.classList.add("content-wrapper");
-
-//         const timeParagraph = document.createElement("p");
-//         timeParagraph.textContent = hourlyTime;
-//         timeParagraph.classList.add("time-container");
-
-//         const tempParagraph = document.createElement("p");
-//         tempParagraph.textContent = hourlyTemp;
-
-//         contentWrapper.appendChild(timeParagraph);
-//         contentWrapper.appendChild(tempParagraph);
-//         // contentWrapper.appendChild(ampmParagraph);
-
-//         hourlyDiv.appendChild(contentWrapper);
-
-//         flexContainer.appendChild(hourlyDiv);
-//     }
-
-//     hourlyContainer.appendChild(flexContainer);
-// }
 
 // function updateCarousel(hourlyData, carouselIndex) {
 //     const carouselContainer = document.querySelector(".carousel-container");
@@ -169,95 +130,67 @@ export function getData(data, weatherBoolean) {
 //     const weatherDataDiv = document.createElement("div");
 //     weatherDataDiv.classList.add("weather-data");
 
-//     // Populate the weather data div with the hourly temperature and time
-//     for (let i = 0; i < hourlyData.temp.length; i++) {
-//         const hourlyTemp = hourlyData.temp[i];
-//         const hourlyTime = hourlyData.time[i];
+//     // Apply CSS styles for horizontal layout
+//     weatherDataDiv.style.display = "flex";
+//     weatherDataDiv.style.flexDirection = "row";
+//     weatherDataDiv.style.alignItems = "center";
 
-//         // Create a paragraph element for each temperature and time
-//         const tempParagraph = document.createElement("p");
-//         tempParagraph.textContent = hourlyTemp;
-//         const timeParagraph = document.createElement("p");
-//         timeParagraph.textContent = hourlyTime;
+//     // Check if the carouselIndex matches the current day index
+//     const currentDayIndex = new Date().getDay(); // Assuming Sunday is the first day (index 0)
+//     if (carouselIndex === currentDayIndex) {
+//         // Populate the weather data div with the hourly temperature and time for the current day
+//         for (let i = 0; i < hourlyData.temp.length; i++) {
+//             const hourlyTemp = hourlyData.temp[i];
+//             const hourlyTime = hourlyData.time[i];
 
-//         // Append the temperature and time paragraphs to the weather data div
-//         weatherDataDiv.appendChild(tempParagraph);
-//         weatherDataDiv.appendChild(timeParagraph);
+//             // Create a div to hold each temperature and time
+//             const dataItemDiv = document.createElement("div");
+//             dataItemDiv.classList.add("weather-data-item");
+
+//             // Create a paragraph element for each temperature and time
+//             const tempParagraph = document.createElement("p");
+//             tempParagraph.textContent = hourlyTemp;
+//             const timeParagraph = document.createElement("p");
+//             timeParagraph.textContent = hourlyTime;
+
+//             // Append the temperature and time paragraphs to the data item div
+//             dataItemDiv.appendChild(tempParagraph);
+//             dataItemDiv.appendChild(timeParagraph);
+
+//             // Append the data item div to the weather data div
+//             weatherDataDiv.appendChild(dataItemDiv);
+//         }
 //     }
 
 //     // Append the weather data div to the carousel
 //     carousel.appendChild(weatherDataDiv);
 // }
 
-function updateCarousel(hourlyData, carouselIndex) {
-    const carouselContainer = document.querySelector(".carousel-container");
-    const carousel = document.querySelector(".carousel");
-
-    // Create a weather data div
-    const weatherDataDiv = document.createElement("div");
-    weatherDataDiv.classList.add("weather-data");
-
-    // Apply CSS styles for horizontal layout
-    weatherDataDiv.style.display = "flex";
-    weatherDataDiv.style.flexDirection = "row";
-    weatherDataDiv.style.alignItems = "center";
-
-    // Check if the carouselIndex matches the current day index
-    const currentDayIndex = new Date().getDay(); // Assuming Sunday is the first day (index 0)
-    if (carouselIndex === currentDayIndex) {
-        // Populate the weather data div with the hourly temperature and time for the current day
-        for (let i = 0; i < hourlyData.temp.length; i++) {
-            const hourlyTemp = hourlyData.temp[i];
-            const hourlyTime = hourlyData.time[i];
-
-            // Create a div to hold each temperature and time
-            const dataItemDiv = document.createElement("div");
-            dataItemDiv.classList.add("weather-data-item");
-
-            // Create a paragraph element for each temperature and time
-            const tempParagraph = document.createElement("p");
-            tempParagraph.textContent = hourlyTemp;
-            const timeParagraph = document.createElement("p");
-            timeParagraph.textContent = hourlyTime;
-
-            // Append the temperature and time paragraphs to the data item div
-            dataItemDiv.appendChild(tempParagraph);
-            dataItemDiv.appendChild(timeParagraph);
-
-            // Append the data item div to the weather data div
-            weatherDataDiv.appendChild(dataItemDiv);
-        }
-    }
-
-    // Append the weather data div to the carousel
-    carousel.appendChild(weatherDataDiv);
-}
-
-function getHighlightsData(data, weatherBoolean) {
-    const dayZeroData = data.forecast.forecastday[0];
-    const humidityData = data.current.humidity;
+function getHighlightsData(data, weatherBoolean, dayIndex, dayText) {
+    const startingPath = data.forecast.forecastday[dayIndex];
+    const humidityData = startingPath.day.avghumidity;
     let lowTemp;
     let highTemp;
     let tempUnit;
     let windStatus;
     let windUnit;
     if (weatherBoolean) {
-        lowTemp = Math.round(dayZeroData.day.mintemp_c);
-        highTemp = Math.round(dayZeroData.day.maxtemp_c);
+        lowTemp = Math.round(startingPath.day.mintemp_c);
+        highTemp = Math.round(startingPath.day.maxtemp_c);
         tempUnit = "\xB0C";
-        windStatus = data.current.wind_kph;
+        windStatus = startingPath.day.maxwind_kph;
         windUnit = "km/h";
     } else {
-        lowTemp = Math.round(dayZeroData.day.mintemp_f);
-        highTemp = Math.round(dayZeroData.day.maxtemp_f);
+        lowTemp = Math.round(startingPath.day.mintemp_f);
+        highTemp = Math.round(startingPath.day.maxtemp_f);
         tempUnit = "\xB0F";
-        windStatus = data.current.wind_mph;
+        windStatus = startingPath.day.maxwind_mph;
         windUnit = "mph";
     }
-    const sunrise = dayZeroData.astro.sunrise;
-    const sunset = dayZeroData.astro.sunset;
+    const sunrise = startingPath.astro.sunrise;
+    const sunset = startingPath.astro.sunset;
 
-    highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset);
+    highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset, dayIndex, dayText);
 }
 
 function printCurrentDay(data, currentDayInt, forecastType) {

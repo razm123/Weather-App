@@ -61,8 +61,11 @@
             <div class="headingWrapper">
                 <h1 class="cityName"></h1>
             </div>
-            <div class="current-weather-wrapper gap-4 cursor-pointer" id="current-weather-wrapper">
-                <div class="today-weather widgetColor w-[80vw] h-[270px] rounded-2xl flex flex-col gap-2 sm:w-[30vw]" id="today-weather">
+            <div class="current-weather-wrapper gap-4" id="current-weather-wrapper">
+                <div
+                    class="today-weather widgetColor w-[80vw] h-[270px] rounded-2xl flex flex-col gap-2 sm:w-[30vw] cursor-pointer"
+                    id="today-weather"
+                >
                     <div id="headerWrapper" class="text-lg sm:text-lg md:text-2xl border-b-2 border-black-rgba flex justify-between px-2">
                         <h2 id="current-day" class=""></h2>
                         <h2 id="current-time"></h2>
@@ -86,7 +89,7 @@
                 </div>
                 <!-- <div class="bg-gradient-to-tl from-[#1e2729] to-[#3d7eaa]"></div> -->
                 <div class="today-highlights widgetColor w-[80vw] h-full rounded-2xl sm:w-[60vw] sm:h-[270px]" id="today-highlights">
-                    <h2 class="h-[30px] text-center font-medium text-xl">Today's highlights</h2>
+                    <h2 class="h-[30px] text-center font-medium text-xl" id="highlights-heading"></h2>
                     <div class="grid-wrapper grid grid-cols-3 m-auto gap-4 h-[calc(95%-30px)] w-[95%] p-2">
                         <div class="today-highlights-grid grid1">
                             <h2 class="text-center">Humidity</h2>
@@ -111,7 +114,7 @@
                             </div>
                         </div>
                         <div class="today-highlights-grid grid4">
-                            <h2 class="text-center">Wind Status</h2>
+                            <h2 class="text-center">Max WInd</h2>
                             <span class="material-symbols-rounded text-center"> air </span>
                             <h2 id="windText"></h2>
                         </div>
@@ -133,7 +136,6 @@
             <div id="daily-weather-wrapper" class="gap-4">
                 <div class="daily-widget" id="daily-0">
                     <h2 id="current-day-one" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
-                    <h2 id="current-month-one" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
                         <img src="" alt="Current Weather" class="current-img scale-150" id="current-img-one" />
                         <h1 id="current-temp-one" class="text-center text-3xl md:text-4xl"></h1>
@@ -147,7 +149,6 @@
                 </div>
                 <div class="daily-widget" id="daily-1">
                     <h2 id="current-day-two" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
-                    <h2 id="current-month-two" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
                         <img src="" alt="Current Weather" class="current-img scale-150" id="current-img-two" />
                         <h1 id="current-temp-two" class="text-center text-3xl md:text-4xl"></h1>
@@ -161,7 +162,6 @@
                 </div>
                 <div class="daily-widget" id="daily-2">
                     <h2 id="current-day-three" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
-                    <h2 id="current-month-three" class="text-center text-xl sm:text-xl md:text-2xl"></h2>
                     <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
                         <img src="" alt="Current Weather" class="current-img scale-150" id="current-img-three" />
                         <h1 id="current-temp-three" class="text-center text-3xl md:text-4xl"></h1>

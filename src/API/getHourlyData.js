@@ -66,8 +66,6 @@ export function displayHourlyData(hourlyData, currentDay, dataIndex) {
     }
     const currentTime = new Date();
     const currentHour = currentTime.getHours();
-    const currentMinutes = currentTime.getMinutes();
-    const remainingHours = 24 - currentHour;
     let hourlyTimeHourArray = [];
     hourlyTimeHourArray.push(hourlyData.time);
     console.log();

@@ -59,14 +59,15 @@ export function dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, currentD
     currentCondition.textContent = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.text;
 }
 
-export function highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset) {
+export function highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset, dayIndex, dayText) {
     const humidity = document.getElementById("humidityText");
+    const highlightsHeading = document.getElementById("highlights-heading");
     const lowTempText = document.getElementById("lowTempText");
     const highTempText = document.getElementById("highTempText");
     const windText = document.getElementById("windText");
     const sunriseText = document.getElementById("sunriseText");
     const sunsetText = document.getElementById("sunsetText");
-
+    highlightsHeading.textContent = `${dayText}'s highlights`;
     humidity.textContent = `${humidityData}%`;
     lowTempText.textContent = `${lowTemp}${tempUnit}`;
     highTempText.textContent = `${highTemp}${tempUnit}`;

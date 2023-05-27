@@ -97,7 +97,7 @@
     }
 
     #daily-weather-wrapper {
-        @apply flex w-screen items-center justify-center dark:text-white sm:flex-row sm:justify-center sm:items-center sm:content-center mt-4 sm:mt-4;
+        @apply flex flex-col sm:flex-row w-screen items-center justify-center dark:text-white sm:flex-row sm:justify-center sm:items-center sm:content-center mt-4 sm:mt-4;
     }
 
     .daily-widget {
