@@ -111,13 +111,13 @@ async function getUserLocation() {
 }
 
 // Function to prompt the user to enable location services on a mobile device
-function promptToEnableLocationServices() {
+function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (isAndroid) {
+    if (isAndroid && !navigator.geolocation) {
         alert("Please enable location services on your device to access weather information.");
-    } else if (isIOS) {
+    } else if (isIOS && !navigator.geolocation) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
             window.location.href = "App-Prefs:Privacy";
@@ -139,5 +139,5 @@ button.addEventListener("click", async () => {
         alert("User disagreed to use location.");
         await handleLocationAndFetchWeather(null, null);
     }
-    promptToEnableLocationServices();
+    EnableLocationServices();
 });
