@@ -3,4 +3,4 @@
 -   Users can click on the "use my location" to detect current location of the user
 
 [Live Demo](https://razm123.github.io/Weather-App/)
-[![Preview](images/Screenshot from 2023-05-28 09-51-37.png)](https://razm123.github.io/Weather-App)
+[![Preview](/home/test/Repos/Weather-App/images/Screenshot from 2023-05-28 09-51-37.png)](https://razm123.github.io/Weather-App)
