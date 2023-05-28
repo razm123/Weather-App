@@ -72,6 +72,7 @@ function askForLocationConsent() {
 // ...
 
 // Function to get user's location and fetch weather data
+// Function to get user's location and fetch weather data
 async function getUserLocation() {
     if (navigator.geolocation) {
         try {
@@ -108,6 +109,25 @@ async function getUserLocation() {
         await handleLocationAndFetchWeather(null, null);
     }
 }
+
+// Function to prompt the user to enable location services on a mobile device
+function promptToEnableLocationServices() {
+    const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+
+    if (isMobileDevice) {
+        const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
+        if (enableLocation) {
+            // Redirect the user to the device settings page for location services
+            // Modify the URL to match the appropriate settings page for your target platform
+            window.location.href = "device-location-settings-page-url";
+        }
+    }
+}
+
+// Attach the event listener to the button element
+
+// Prompt the user to enable location services on mobile devices
+promptToEnableLocationServices();
 
 // Attach the event listener to the button element
 const button = document.getElementById("geolocationButton");
