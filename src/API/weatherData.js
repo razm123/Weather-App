@@ -112,14 +112,18 @@ async function getUserLocation() {
 
 // Function to prompt the user to enable location services on a mobile device
 function promptToEnableLocationServices() {
-    const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+    const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isMobileDevice) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
-            // Redirect the user to the device settings page for location services
-            // Modify the URL to match the appropriate settings page for your target platform
-            window.location.href = "device-location-settings-page-url";
+            if (/Android/i.test(navigator.userAgent)) {
+                // Redirect to Android location settings
+                window.location.href = "https://www.android.com/locationservices/";
+            } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Redirect to iOS location settings
+                window.location.href = "App-Prefs:Privacy";
+            }
         }
     }
 }
