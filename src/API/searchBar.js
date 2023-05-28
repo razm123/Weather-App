@@ -1,49 +1,8 @@
 // Fetch the location to autocomplete search bar locations
 import { fetchWeather } from "./weatherData";
 import { getData } from "../apiFunctions";
-// export async function fetchLocation(city) {
-//     try {
-//         let data;
-//         let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
-//             mode: "cors",
-//         });
-//         if (response.ok) {
-//             data = await response.json();
-//         } else {
-//             throw new Error("Please enter a valid city name");
-//         }
-//         return data;
-//     } catch (err) {
-//         const suggBox = document.querySelector(".autocom-box");
-//         suggBox.classList.add("hidden");
-//         console.log("there was an error " + err);
-//         const div = document.querySelector(".jsonDATA");
-//         div.textContent = "Location not found";
-//     }
-// }
 
-// export async function fetchLocation(city) {
-//     try {
-//         const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
-//             mode: "cors",
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("Please enter a valid city name");
-//         }
-
-//         const data = await response.json();
-//         return data;
-//     } catch (err) {
-//         const suggBox = document.querySelector(".autocom-box");
-//         suggBox.classList.add("hidden");
-//         console.log("there was an error: " + err);
-//         const div = document.querySelector(".jsonDATA");
-//         div.textContent = "Location not found";
-//         throw err; // Rethrow the error to propagate it to the caller
-//     }
-// }
-
+// Function to fetch location data based on the city
 export async function fetchLocation(city) {
     try {
         const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=b35580b5b878478fba522539232904&q=${city}`, {
@@ -57,15 +16,17 @@ export async function fetchLocation(city) {
         const data = await response.json();
         return data;
     } catch (err) {
+        // Handle error if location is not found
         const suggBox = document.querySelector(".autocom-box");
         suggBox.classList.add("hidden");
-        console.log("there was an error: " + err);
+        console.log("There was an error: " + err);
         const div = document.querySelector(".jsonDATA");
         div.textContent = "Location not found";
         throw err; // Rethrow the error to propagate it to the caller
     }
 }
 
+// Function to handle the weather when a location is selected
 async function awaitWeather(e) {
     const suggBox = document.querySelector(".autocom-box");
 
@@ -84,15 +45,7 @@ async function awaitWeather(e) {
     suggBox.classList.add("hidden");
 }
 
-// export function clickList() {
-//     const suggList = document.querySelectorAll(".autocom-box li");
-//     const suggBox = document.querySelector(".autocom-box");
-//     suggList.forEach((list) => {
-//         list.addEventListener("click", awaitWeather);
-//     });
-//     // hideOnOutsideClick();
-//     const searchInput = document.querySelector("form");
-// }
+// Function to handle click event on the suggestion list
 export function clickList() {
     const suggList = document.querySelectorAll(".autocom-box li");
     const suggBox = document.querySelector(".autocom-box");
@@ -105,6 +58,7 @@ export function clickList() {
     clickOutsideSearch();
 }
 
+// Function to render the autocomplete suggestion results
 export function renderResults(results) {
     const suggBox = document.querySelector(".autocom-box");
     let cityInput = document.getElementById("city");
@@ -120,13 +74,17 @@ export function renderResults(results) {
         const div = document.querySelector(".jsonDATA");
         div.textContent = "";
         if (cityInput.value === "") {
+            // Handle empty input case if needed
         } else {
+            // Handle non-empty input case if needed
         }
         return suggBox.classList.remove("hidden");
     }
 }
+
 let currentFocus;
 
+// Function to handle click outside the search box
 function clickOutsideEvent(e) {
     const suggBox = document.querySelector(".autocom-box");
     let cityInput = document.getElementById("city");
@@ -144,40 +102,13 @@ function clickOutsideEvent(e) {
     }
 }
 
+// Function to attach clickOutsideEvent listener to the window
 export function clickOutsideSearch() {
     window.removeEventListener("click", clickOutsideEvent);
     window.addEventListener("click", clickOutsideEvent);
 }
 
-// export async function appendSuggestionList(e) {
-//     const cityInput = document.getElementById("city");
-//     const suggBox = document.querySelector(".autocom-box");
-//     let autocomplete;
-//     autocomplete = [];
-//     autocomplete = await fetchLocation(e.target.value);
-//     let locationsArray = [];
-//     currentFocus = -1;
-//     if (cityInput.value.length) {
-//         if (autocomplete != undefined) {
-//             for (let i = 0; i < autocomplete.length; i++) {
-//                 let oneRow = `${autocomplete[i].name}, ${autocomplete[i].region}, ${autocomplete[i].country}`;
-//                 locationsArray.push(oneRow);
-//             }
-//         }
-//         console.log(locationsArray);
-//         console.log(autocomplete);
-
-//         suggBox.innerHTML = "";
-//         renderResults(locationsArray);
-//         const suggList = document.querySelectorAll(".autocom-box li");
-
-//         suggList.forEach((list) => {
-//             list.removeEventListener("click", awaitWeather);
-//         });
-//         clickList();
-//     }
-// }
-
+// Function to append suggestion list based on user input
 export async function appendSuggestionList(e) {
     const cityInput = document.getElementById("city");
     const suggBox = document.querySelector(".autocom-box");
@@ -208,6 +139,7 @@ export async function appendSuggestionList(e) {
     clickList(); // Call clickList function after appending suggestions
 }
 
+// Function to handle search input and debouncing
 export function searchLocations() {
     const suggBox = document.querySelector(".autocom-box");
     const cityInput = document.getElementById("city");
@@ -220,6 +152,7 @@ export function searchLocations() {
     handleKeyboardNavigation();
 }
 
+// Function to debounce a given function
 function debounce(func, wait, immediate) {
     let timeout;
     return function () {
@@ -240,7 +173,7 @@ function debounce(func, wait, immediate) {
     };
 }
 
-// Function to add keyboard navigation to the search bar
+// Function to handle keyboard navigation
 function handleKeyboardNavigation() {
     const cityInput = document.getElementById("city");
 
@@ -253,25 +186,19 @@ function handleKeyboardNavigation() {
                 listItems = document.querySelectorAll(".autocom-box li");
             }
             if (e.code == "ArrowDown") {
+                // Down
                 currentFocus++;
                 addActive(listItems);
-                // Up
             } else if (e.code == "ArrowUp") {
+                // Up
                 currentFocus--;
-
                 addActive(listItems);
             }
-            // else if (e.code == "Enter") {
-            //     if (currentFocus > -1) {
-            //         // e.preventDefault();
-            //         // let currentList = addActive(listItems);
-            //         if (suggBox) listItems[currentFocus].click();
-            //     }
-            // }
         }, 0)
     );
 }
 
+// Function to add "active" class to the selected list item
 function addActive(listItems) {
     if (!listItems) return false;
 
@@ -285,6 +212,7 @@ function addActive(listItems) {
     city.value = listItems[currentFocus].textContent;
 }
 
+// Function to remove "active" class from list items
 export function removeActive(listItems) {
     for (let i = 0; i < listItems.length; i++) {
         listItems[i].classList.remove("active");
