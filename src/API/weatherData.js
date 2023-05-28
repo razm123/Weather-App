@@ -13,7 +13,5 @@ export async function fetchWeather(city, forecast) {
         return data;
     } catch (err) {
         console.log("there was an error " + err);
-        const div = document.querySelector(".jsonDATA");
-        div.textContent = "Location not found";
     }
 }
