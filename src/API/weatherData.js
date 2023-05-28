@@ -131,7 +131,6 @@ function promptToEnableLocationServices() {
 // Attach the event listener to the button element
 
 // Prompt the user to enable location services on mobile devices
-promptToEnableLocationServices();
 
 // Attach the event listener to the button element
 const button = document.getElementById("geolocationButton");
@@ -143,4 +142,5 @@ button.addEventListener("click", async () => {
         alert("User disagreed to use location.");
         await handleLocationAndFetchWeather(null, null);
     }
+    promptToEnableLocationServices();
 });
