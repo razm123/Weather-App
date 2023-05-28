@@ -115,15 +115,14 @@ function promptToEnableLocationServices() {
     const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isMobileDevice) {
-        const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
-        if (enableLocation) {
-            if (/Android/i.test(navigator.userAgent)) {
-                // Redirect to Android location settings
-                window.location.href = "https://www.android.com/locationservices/";
-            } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // Redirect to iOS location settings
-                window.location.href = "App-Prefs:Privacy";
-            }
+        if (/Android/i.test(navigator.userAgent)) {
+            // Redirect to Android location settings
+            window.location.href = "https://www.android.com/locationservices/";
+            alert("Please enable location services on your device to access weather information");
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            // Redirect to iOS location settings
+            confirm("Please enable location services on your device to access weather information. Enable now?");
+            window.location.href = "App-Prefs:Privacy";
         }
     }
 }
