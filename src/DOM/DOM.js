@@ -54,7 +54,7 @@ export function dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, currentD
     } else {
         currentDate.textContent = currentDay;
     }
-    currentTempHtml.textContent = `${dailyTempMax}\xB0/${dailyTempMin}${tempUnit}`;
+    currentTempHtml.textContent = `${dailyTempMax}\xB0/${dailyTempMin} ${tempUnit}`;
     precipitation.textContent = "Precipitation: " + data.forecast.forecastday[parseInt(currentDayInt)].day.daily_chance_of_rain + "%";
     currentCondition.textContent = data.forecast.forecastday[parseInt(currentDayInt)].day.condition.text;
 }
