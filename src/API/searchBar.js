@@ -78,7 +78,8 @@ async function awaitWeather(e) {
     document.title = currentCity.split(",")[0] + " Weather";
 
     localStorage.setItem("currentCity", currentCity);
-
+    let icon = document.getElementById("favicon");
+    icon.href = data.current.condition.icon;
     document.querySelector("form").reset();
     suggBox.classList.add("hidden");
 }

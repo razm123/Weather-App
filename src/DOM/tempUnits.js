@@ -19,7 +19,7 @@ export function toggleUnits() {
             getData(data, weatherBoolean);
         }
     });
-    console.log(weatherBoolean);
+    // console.log(weatherBoolean);
     return weatherBoolean;
 }
 

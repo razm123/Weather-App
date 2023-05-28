@@ -36,7 +36,6 @@ function getdailyTemp(data, currDay, weatherBoolean) {
 //         feelslike = Math.round(data.current.feelslike_f);
 //         tempUnit = "\xB0F";
 //     }
-//     console.log(data);
 //     for (let i = 0; i <= 2; i++) {
 //         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
 //         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);
@@ -61,7 +60,6 @@ function getdailyTemp(data, currDay, weatherBoolean) {
 //         feelslike = Math.round(data.current.feelslike_f);
 //         tempUnit = "\xB0F";
 //     }
-//     console.log(data);
 //     for (let i = 0; i <= 2; i++) {
 //         let { dailyTempMin, dailyTempMax } = getdailyTemp(data, i, weatherBoolean);
 //         dailyWidget(data, dailyTempMin, dailyTempMax, tempUnit, printCurrentDay(data, i, "forecast"), i);
@@ -92,7 +90,6 @@ export function getData(data, weatherBoolean) {
         feelslike = Math.round(data.current.feelslike_f);
         tempUnit = "\xB0F";
     }
-    console.log(data);
     const hourlyData_zero = getHourlyData(data, weatherBoolean, 0);
     const day_zero = document.querySelector(`#daily-0 h2`).textContent;
     printCurrentDay(data, 0, "forecast");
@@ -248,6 +245,8 @@ function submitData() {
 
         let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
         document.title = currentCity.split(",")[0] + " Weather";
+        let icon = document.getElementById("favicon");
+        icon.href = data.current.condition.icon;
 
         localStorage.setItem("currentCity", currentCity);
         document.querySelector("form").reset();
@@ -271,9 +270,11 @@ export function runAPI() {
         let currentCity = localStorage.getItem("currentCity") || "New York City";
         const data = await fetchWeather(currentCity, "forecast");
         document.title = currentCity.split(",")[0] + " Weather";
+        let icon = document.getElementById("favicon");
+        icon.href = data.current.condition.icon;
+
         getData(data, weatherBoolean);
         const currentTest = await fetchWeather(currentCity, "current");
-        console.log(currentTest);
         // getCurrentWeather();
     });
     searchLocations();
@@ -284,16 +285,13 @@ export function runAPI() {
 //     const size = new TextEncoder().encode(JSON.stringify(data)).length;
 //     const kiloBytes = size / 1024;
 //     const megaBytes = kiloBytes / 1024;
-//     console.log(kiloBytes);
 //     currentWeather(data);
-//     console.log(data);
 // }
 
 // function currentWeather(data) {
 //     const dayZero = printCurrentDay(data, 0, "current");
 //     let last_updated = data.current.last_updated;
 //     let temp_c = data.current.temp_c;
-//     console.log(`day: ${dayZero}, last updated: ${last_updated}, temperature: ${temp_c}\xB0C`);
 // }
 
 // function printTempData(data, currentDayInt, weatherBoolean) {

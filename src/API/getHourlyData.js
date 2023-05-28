@@ -54,7 +54,7 @@ export function getHourlyData(data, weatherBoolean, currDay) {
     let hourlyDate = data.forecast.forecastday[currDay].date;
     let dateFormatted = new Date(hourlyDate).toDateString({ month: "long", day: "numeric" });
     hourlyObject["date"] = hourlyDate;
-    console.log(hourlyObject);
+    // console.log(hourlyObject);
     return hourlyObject;
 }
 
@@ -68,7 +68,7 @@ export function displayHourlyData(hourlyData, currentDay, dataIndex) {
     const currentHour = currentTime.getHours();
     let hourlyTimeHourArray = [];
     hourlyTimeHourArray.push(hourlyData.time);
-    console.log();
+
     // Loop through the hourlyData and create divs to display the data
 
     if (dataIndex === 0) {
