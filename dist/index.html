@@ -17,12 +17,7 @@
     <body class="bg-white dark:bg-black m-0 p-0 min-h-screen w-screen">
         <div class="container min-h-screen w-screen">
             <header class="flex w-screen items-center justify-center relative">
-                <div class="emptyDiv absolute left-0">
-                    <button id="geolocationButton" class="dark:text-white flex items-c">
-                        <span class="material-symbols-rounded dark:text-white"> location_on </span>
-                        Use my location
-                    </button>
-                </div>
+                <div class="emptyDiv"></div>
                 <!-- <div class="emptyDiv"></div> -->
                 <h1 class="heading">Weather App</h1>
                 <div class="units-theme-wrapper">
@@ -65,6 +60,12 @@
 
             <div class="jsonDATA"></div>
             <div class="headingWrapper mb-4 sm:mb-2">
+                <div class="geolocation-wrapper absolute left-0">
+                    <button id="geolocationButton" class="dark:text-white flex">
+                        <span class="material-symbols-rounded dark:text-white"> location_on </span>
+                        Use my location
+                    </button>
+                </div>
                 <h1 class="cityName"></h1>
             </div>
             <div class="current-weather-wrapper gap-4" id="current-weather-wrapper">
