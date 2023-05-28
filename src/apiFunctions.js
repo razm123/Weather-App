@@ -214,3 +214,26 @@ export function runAPI() {
 
     searchLocations();
 }
+
+// if (navigator.geolocation) {
+//     // Geolocation is supported
+//     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+// } else {
+//     // Geolocation is not supported
+//     console.log("Geolocation is not supported by this browser.");
+// }
+
+// function successCallback(position) {
+//     // Retrieve the latitude and longitude from the position object
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude;
+
+//     // Use the latitude and longitude values
+//     console.log("Latitude: " + latitude);
+//     console.log("Longitude: " + longitude);
+// }
+
+// function errorCallback(error) {
+//     // Handle any errors that occur while retrieving the user's location
+//     console.log("Error during geolocation: " + error.message);
+// }

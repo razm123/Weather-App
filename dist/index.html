@@ -17,7 +17,12 @@
     <body class="bg-white dark:bg-black m-0 p-0 min-h-screen w-screen">
         <div class="container min-h-screen w-screen">
             <header class="flex w-screen items-center justify-center relative">
-                <div class="emptyDiv"></div>
+                <div class="emptyDiv absolute left-0">
+                    <button id="geolocationButton" class="dark:text-white flex items-c">
+                        <span class="material-symbols-rounded dark:text-white"> location_on </span>
+                        Use my location
+                    </button>
+                </div>
                 <!-- <div class="emptyDiv"></div> -->
                 <h1 class="heading">Weather App</h1>
                 <div class="units-theme-wrapper">
@@ -134,7 +139,7 @@
             <div id="daily-weather-wrapper" class="gap-4">
                 <div class="daily-widget" id="daily-0">
                     <h2 id="current-day-one" class="text-xl sm:text-xl md:text-2xl border-b-2 border-black-rgba text-center"></h2>
-                    <div class="img-wrapper w-full flex flex-col gap-2 justify-between items-center px-6">
+                    <div class="img-wrapper w-full flex flex-col gap-10 justify-between items-center px-6">
                         <img src="" alt="Current Weather" class="current-img scale-150" id="current-img-one" />
                         <h1 id="current-temp-one" class="text-center text-3xl md:text-4xl"></h1>
                     </div>
