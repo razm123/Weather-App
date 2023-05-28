@@ -190,6 +190,27 @@ function getHighlightsData(data, weatherBoolean, dayIndex, dayText) {
     highlights(humidityData, lowTemp, highTemp, tempUnit, windStatus, windUnit, sunrise, sunset, dayIndex, dayText);
 }
 
+// function printCurrentDay(data, currentDayInt, forecastType) {
+//     let currentDay;
+//     if (forecastType === "forecast") {
+//         currentDay = data.forecast.forecastday[currentDayInt].date;
+//     } else {
+//         currentDay = new Date();
+//     }
+//     const zone = new Date().getTimezoneOffset() / 60;
+//     const dt = new Date(`${currentDay} GMT-${zone}`);
+//     const dayInt = dt.getDay();
+//     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "December"];
+//     const getDay = dayNames[dt.getDay()];
+//     const getMonth = monthNames[dt.getMonth()];
+//     const getMonthDay = dt.getDate();
+//     const getYear = dt.getFullYear();
+//     // let getMonthDaySplit = String(getMonthDay).split("");
+//     let currentDate = `${getDay}`;
+//     document.getElementById("current-month").textContent = `${getMonth} ${getMonthDay}${nthNumber(getMonthDay)}`;
+//     return currentDate;
+// }
 function printCurrentDay(data, currentDayInt, forecastType) {
     let currentDay;
     if (forecastType === "forecast") {
@@ -201,12 +222,11 @@ function printCurrentDay(data, currentDayInt, forecastType) {
     const dt = new Date(`${currentDay} GMT-${zone}`);
     const dayInt = dt.getDay();
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "December"];
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const getDay = dayNames[dt.getDay()];
     const getMonth = monthNames[dt.getMonth()];
     const getMonthDay = dt.getDate();
     const getYear = dt.getFullYear();
-    // let getMonthDaySplit = String(getMonthDay).split("");
     let currentDate = `${getDay}`;
     document.getElementById("current-month").textContent = `${getMonth} ${getMonthDay}${nthNumber(getMonthDay)}`;
     return currentDate;
@@ -271,6 +291,7 @@ export function runAPI() {
         const data = await fetchWeather(currentCity, "forecast");
         document.title = currentCity.split(",")[0] + " Weather";
         let icon = document.getElementById("favicon");
+        console.log(data);
         icon.href = data.current.condition.icon;
 
         getData(data, weatherBoolean);
