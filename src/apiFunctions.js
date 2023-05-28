@@ -211,19 +211,40 @@ function getHighlightsData(data, weatherBoolean, dayIndex, dayText) {
 //     document.getElementById("current-month").textContent = `${getMonth} ${getMonthDay}${nthNumber(getMonthDay)}`;
 //     return currentDate;
 // }
+// function printCurrentDay(data, currentDayInt, forecastType) {
+//     let currentDay;
+//     if (forecastType === "forecast") {
+//         currentDay = data.forecast.forecastday[currentDayInt].date;
+//     } else {
+//         currentDay = new Date();
+//     }
+//     const zone = new Date().getTimezoneOffset() / 60;
+//     const dt = new Date(`${currentDay} GMT-${zone}`);
+//     const dayInt = dt.getDay();
+//     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//     const getDay = dayNames[dt.getDay()];
+//     const getMonth = monthNames[dt.getMonth()];
+//     const getMonthDay = dt.getDate();
+//     const getYear = dt.getFullYear();
+//     let currentDate = `${getDay}`;
+//     document.getElementById("current-month").textContent = `${getMonth} ${getMonthDay}${nthNumber(getMonthDay)}`;
+//     return currentDate;
+// }
+
 function printCurrentDay(data, currentDayInt, forecastType) {
     let currentDay;
     if (forecastType === "forecast") {
         currentDay = data.forecast.forecastday[currentDayInt].date;
     } else {
-        currentDay = new Date();
+        currentDay = new Date().toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
     }
     const zone = new Date().getTimezoneOffset() / 60;
-    const dt = new Date(`${currentDay} GMT-${zone}`);
+    const dt = new Date(currentDay.replace(/-/g, "/") + ` GMT-${zone}`);
     const dayInt = dt.getDay();
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const getDay = dayNames[dt.getDay()];
+    const getDay = dayNames[dayInt];
     const getMonth = monthNames[dt.getMonth()];
     const getMonthDay = dt.getDate();
     const getYear = dt.getFullYear();
@@ -286,6 +307,7 @@ export function runAPI() {
     toggleUnits();
     submitData();
     window.addEventListener("DOMContentLoaded", async () => {
+        printCurrentDay(data, 0);
         let weatherBoolean = renderDOM();
         let currentCity = localStorage.getItem("currentCity") || "New York City";
         const data = await fetchWeather(currentCity, "forecast");
