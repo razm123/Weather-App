@@ -51,11 +51,12 @@ async function handleLocationAndFetchWeather(latitude, longitude) {
         localStorage.setItem("currentCity", currentCity);
         let icon = document.getElementById("favicon");
         icon.href = data.current.condition.icon;
-    } else {
-        // Use the fallback location
-        console.log("Using fallback location.");
-        await fetchWeatherLocation(fallbackLatitude, fallbackLongitude);
     }
+    // else {
+    //     // Use the fallback location
+    //     console.log("Using fallback location.");
+    //     await fetchWeatherLocation(fallbackLatitude, fallbackLongitude);
+    // }
 }
 
 // Function to ask for user consent using a confirm dialog
@@ -100,7 +101,7 @@ async function getUserLocation() {
         }
     } else {
         // Geolocation is not supported, use the fallback location
-        console.log("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by this browser.");
         console.log("Using fallback location.");
 
         // Call the function to handle location and fetch weather data with fallback coordinates
@@ -115,7 +116,7 @@ button.addEventListener("click", async () => {
     if (consent) {
         await getUserLocation();
     } else {
-        console.log("User disagreed to use location.");
+        alert("User disagreed to use location.");
         await handleLocationAndFetchWeather(null, null);
     }
 });
