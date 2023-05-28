@@ -89,7 +89,7 @@ async function getUserLocation() {
         } catch (error) {
             if (error && error.message) {
                 // Error getting user's location, use the fallback location
-                console.log("Error during geolocation: " + error.message);
+                alert("Error during geolocation: " + error.message);
             } else {
                 console.log("Error getting user's location. Using fallback location.");
             }
