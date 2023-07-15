@@ -159,42 +159,14 @@ function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    // if (isAndroid && "geolocation" in navigator) {
-    //     const locationPermission = localStorage.getItem(localStorageKey);
-    //     if (locationPermission === "granted") {
-    //         console.log("Location services are enabled on Android.");
-    //         return;
-    //     }
-
-    //     navigator.geolocation.getCurrentPosition(
-    //         () => {
-    //             localStorage.setItem(localStorageKey, "granted");
-    //             console.log("Location services are enabled on Android.");
-    //         },
-    //         (error) => {
-    //             alert("Please enable location services on your Android device to access weather information.");
-    //             console.log("Error getting location on Android: " + error);
-    //         }
-    //     );
     if (isAndroid && "geolocation" in navigator) {
-        const locationPermission = localStorage.getItem(localStorageKey);
-        if (locationPermission === "granted") {
-            console.log("Location services are enabled on Android.");
-            return;
-        }
-
         navigator.geolocation.getCurrentPosition(
             () => {
-                localStorage.setItem(localStorageKey, "granted");
                 console.log("Location services are enabled on Android.");
             },
             (error) => {
-                if (error.code === error.PERMISSION_DENIED) {
-                    localStorage.setItem(localStorageKey, "denied");
-                    alert("Please enable location services on your Android device to access weather information.");
-                } else {
-                    alert("Error occurred while getting location on Android: " + error.message);
-                }
+                alert("Please enable location services on your Android device to access weather information.");
+                console.log("Error getting location on Android: " + error);
             }
         );
     } else if (isIOS && !navigator.geolocation) {
