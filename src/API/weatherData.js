@@ -161,13 +161,18 @@ function EnableLocationServices() {
 
     if (isAndroid) {
         if ("geolocation" in navigator) {
-            navigator.permissions.query({ name: "geolocation" }).then((result) => {
-                if (result.state === "granted") {
-                    console.log("Location services are enabled on Android.");
-                } else {
-                    alert("Please enable location services on your Android device to access weather information.");
-                }
-            });
+            navigator.permissions
+                .query({ name: "geolocation" })
+                .then((result) => {
+                    if (result.state === "granted") {
+                        console.log("Location services are enabled on Android.");
+                    } else {
+                        alert("Please enable location services on your Android device to access weather information.");
+                    }
+                })
+                .catch((error) => {
+                    alert("Error occurred while checking location permission: " + error.message);
+                });
         } else {
             alert("Geolocation is not supported by this browser.");
         }
