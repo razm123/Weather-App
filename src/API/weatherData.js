@@ -130,17 +130,28 @@ function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (isAndroid && !navigator.geolocation) {
-        alert("Please enable location services on your device to access weather information.");
+    if (isAndroid) {
+        if (!navigator.geolocation) {
+            alert("Please enable location services on your device to access weather information.");
+        } else {
+            navigator.geolocation.getCurrentPosition(
+                () => {
+                    // Location services are enabled
+                    console.log("Location services are enabled on Android.");
+                },
+                (error) => {
+                    // Location services are disabled or there was an error
+                    alert("Please enable location services on your device to access weather information.");
+                }
+            );
+        }
     } else if (isIOS && !navigator.geolocation) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
-            window.location.href = "App-Prefs:Privacy"; // Open privacy settings on iOS devices
+            window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open privacy settings on iOS devices
         }
     } else if (!navigator.geolocation) {
         alert("Geolocation is not supported by this browser.");
-    } else {
-        alert("Please enable location services on your device.");
     }
 }
 
