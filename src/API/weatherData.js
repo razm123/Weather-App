@@ -159,23 +159,16 @@ function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (isAndroid) {
-        if ("geolocation" in navigator) {
-            navigator.permissions
-                .query({ name: "geolocation" })
-                .then((result) => {
-                    if (result.state === "granted") {
-                        console.log("Location services are enabled on Android.");
-                    } else {
-                        alert("Please enable location services on your Android device to access weather information.");
-                    }
-                })
-                .catch((error) => {
-                    alert("Error occurred while checking location permission: " + error.message);
-                });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+    if (isAndroid && "geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            () => {
+                console.log("Location services are enabled on Android.");
+            },
+            (error) => {
+                alert("Please enable location services on your Android device to access weather information.");
+                console.log("Error getting location on Android: " + error);
+            }
+        );
     } else if (isIOS && !navigator.geolocation) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
