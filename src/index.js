@@ -1,6 +1,6 @@
 import "./input.css";
-import { runAPI } from "./apiFunctions";
-import { setTheme } from "./darkMode";
+import { runAPI } from "./API/apiFunctions";
+import { setTheme } from "./DOM/darkMode";
 import { clickOutsideSearch } from "./API/searchBar";
 import { searchLocations } from "./API/searchBar";
 runAPI();

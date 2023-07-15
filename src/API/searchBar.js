@@ -1,6 +1,6 @@
 // Fetch the location to autocomplete search bar locations
 import { fetchWeather } from "./weatherData";
-import { getData } from "../apiFunctions";
+import { getData } from "./apiFunctions";
 
 // Function to fetch location data based on the city
 export async function fetchLocation(city) {

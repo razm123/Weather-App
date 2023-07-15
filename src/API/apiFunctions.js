@@ -1,14 +1,14 @@
 // Importing modules
-import { searchLocations } from "./API/searchBar";
-import { clickList } from "./API/searchBar";
-import { toggleUnits } from "./DOM/tempUnits";
-import { renderDOM } from "./DOM/tempUnits";
-import { fetchWeather } from "./API/weatherData";
-import { currentWidget } from "./DOM/DOM";
-import { highlights } from "./DOM/DOM";
-import { dailyWidget } from "./DOM/DOM";
-import { displayHourlyData } from "./API/getHourlyData";
-import { getHourlyData } from "./API/getHourlyData";
+import { searchLocations } from "./searchBar";
+import { clickList } from "./searchBar";
+import { toggleUnits } from "../DOM/tempUnits";
+import { renderDOM } from "../DOM/tempUnits";
+import { fetchWeather } from "./weatherData";
+import { currentWidget } from "../DOM/DOM";
+import { highlights } from "../DOM/DOM";
+import { dailyWidget } from "../DOM/DOM";
+import { displayHourlyData } from "./getHourlyData";
+import { getHourlyData } from "./getHourlyData";
 
 // Function to get daily temperature
 function getdailyTemp(data, currDay, weatherBoolean) {

@@ -1,5 +1,5 @@
 // Fetch the weather data (current or forecast, based on forecast parameter)
-import { getData } from "../apiFunctions";
+import { getData } from "./apiFunctions";
 export async function fetchWeather(city, forecast) {
     try {
         let data;
@@ -45,7 +45,8 @@ async function handleLocationAndFetchWeather(latitude, longitude) {
     if (latitude && longitude) {
         // Fetch weather data using the obtained coordinates
         let data = await fetchWeatherLocation(latitude, longitude);
-        getData(data);
+        let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
+        getData(data, weatherBoolean);
         let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
         document.title = currentCity.split(",")[0] + " Weather";
         localStorage.setItem("currentCity", currentCity);

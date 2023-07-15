@@ -1,4 +1,4 @@
-import { getData } from "../apiFunctions";
+import { getData } from "../API/apiFunctions";
 import { fetchWeather } from "../API/weatherData";
 export function toggleUnits() {
     let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean")) || false;

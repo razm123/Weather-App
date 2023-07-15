@@ -1,5 +1,5 @@
 import { fetchWeather } from "./weatherData";
-import { nthNumber } from "../apiFunctions";
+import { nthNumber } from "./apiFunctions";
 
 // Function to get hourly data from the weather forecast
 export function getHourlyData(data, weatherBoolean, currDay) {
