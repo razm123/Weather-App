@@ -162,10 +162,10 @@ function EnableLocationServices() {
     if (isAndroid && "geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             () => {
-                console.log("Location services are enabled on Android.");
+                console.log("Location services are enabled.");
             },
             (error) => {
-                alert("Please enable location services on your Android device to access weather information.");
+                alert("Please enable location services on your device to access weather information.");
                 console.log("Error getting location on Android: " + error);
             }
         );
