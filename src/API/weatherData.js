@@ -164,19 +164,35 @@ function EnableLocationServices() {
     } else if (isIOS && !navigator.geolocation) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
-            const userAgent = navigator.userAgent.toLowerCase();
-            if (userAgent.indexOf("safari") !== -1 && userAgent.indexOf("chrome") === -1) {
-                window.location.href = "prefs:root=Privacy&path=LOCATION"; // Open privacy settings on Safari
-            } else {
-                window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open location settings on other iOS browsers
-            }
+            window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open privacy settings on iOS devices
         }
     } else if (!navigator.geolocation) {
         alert("Geolocation is not supported by this browser.");
-    } else {
-        alert("Please enable location services on your device to access weather information.");
     }
 }
+
+// function EnableLocationServices() {
+//     const isAndroid = /Android/i.test(navigator.userAgent);
+//     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+//     if (isAndroid && !navigator.geolocation) {
+//         alert("Please enable location services on your device to access weather information.");
+//     } else if (isIOS && !navigator.geolocation) {
+//         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
+//         if (enableLocation) {
+//             const userAgent = navigator.userAgent.toLowerCase();
+//             if (userAgent.indexOf("safari") !== -1 && userAgent.indexOf("chrome") === -1) {
+//                 window.location.href = "prefs:root=Privacy&path=LOCATION"; // Open privacy settings on Safari
+//             } else {
+//                 window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open location settings on other iOS browsers
+//             }
+//         }
+//     } else if (!navigator.geolocation) {
+//         alert("Geolocation is not supported by this browser.");
+//     } else {
+//         alert("Please enable location services on your device to access weather information.");
+//     }
+// }
 
 // Attach the event listener to the button element
 
