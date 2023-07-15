@@ -21,7 +21,7 @@ const fallbackLongitude = -74.006; // Example: New York City longitude
 
 // Function to fetch weather data
 async function fetchWeatherLocation(latitude, longitude) {
-    const apiKey = "b35580b5b878478fba522539232904"; // Replace with your actual API key
+    const apiKey = "b35580b5b878478fba522539232904";
 
     // API endpoint URL
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=3`;
@@ -112,6 +112,20 @@ async function getUserLocation() {
 }
 
 // Function to prompt the user to enable location services on a mobile device
+// function EnableLocationServices() {
+//     const isAndroid = /Android/i.test(navigator.userAgent);
+//     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+//     if (isAndroid && !navigator.geolocation) {
+//         alert("Please enable location services on your device to access weather information.");
+//     } else if (isIOS && !navigator.geolocation) {
+//         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
+//         if (enableLocation) {
+//             window.location.href = "App-Prefs:Privacy";
+//         }
+//     }
+// }
+
 function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -121,7 +135,20 @@ function EnableLocationServices() {
     } else if (isIOS && !navigator.geolocation) {
         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
         if (enableLocation) {
-            window.location.href = "App-Prefs:Privacy";
+            window.location.href = "App-Prefs:Privacy"; // Open privacy settings on iOS devices
+        }
+    } else if (!navigator.geolocation) {
+        alert("Geolocation is not supported by this browser.");
+    } else {
+        // Geolocation is supported, but user denied permission or there was an error acquiring the position
+        const enableLocation = confirm("Please enable location services on your device to access weather information. Open location settings?");
+        if (enableLocation) {
+            // Open location settings based on the platform
+            if (isAndroid) {
+                window.location.href = "https://www.android.com/location";
+            } else if (isIOS) {
+                window.location.href = "App-Prefs:root=LOCATION_SERVICES";
+            }
         }
     }
 }
