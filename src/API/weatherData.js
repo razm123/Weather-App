@@ -91,7 +91,7 @@ async function getUserLocation() {
         } catch (error) {
             if (error && error.message) {
                 // Error getting user's location, use the fallback location
-                alert("Error during geolocation: " + error.message);
+                console.log("Error during geolocation: " + error.message);
             } else {
                 console.log("Error getting user's location. Using fallback location.");
             }
@@ -138,18 +138,9 @@ function EnableLocationServices() {
             window.location.href = "App-Prefs:Privacy"; // Open privacy settings on iOS devices
         }
     } else if (!navigator.geolocation) {
-        alert("Geolocation is not supported by this browser");
+        alert("Geolocation is not supported by this browser.");
     } else {
-        // Geolocation is supported, but user denied permission or there was an error acquiring the position
-        const enableLocation = confirm("Please enable location services on your device to access weather information. Open location settings?");
-        if (enableLocation) {
-            // Open location settings based on the platform
-            if (isAndroid) {
-                window.location.href = "settings://location";
-            } else if (isIOS) {
-                window.location.href = "App-Prefs:root=LOCATION_SERVICES";
-            }
-        }
+        alert("Please enable location services on your device.");
     }
 }
 
