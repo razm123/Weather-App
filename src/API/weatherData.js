@@ -160,8 +160,15 @@ function EnableLocationServices() {
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (isAndroid && "geolocation" in navigator) {
+        const locationPermission = localStorage.getItem(localStorageKey);
+        if (locationPermission === "granted") {
+            console.log("Location services are enabled on Android.");
+            return;
+        }
+
         navigator.geolocation.getCurrentPosition(
             () => {
+                localStorage.setItem(localStorageKey, "granted");
                 console.log("Location services are enabled on Android.");
             },
             (error) => {
