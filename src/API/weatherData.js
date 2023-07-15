@@ -138,14 +138,14 @@ function EnableLocationServices() {
             window.location.href = "App-Prefs:Privacy"; // Open privacy settings on iOS devices
         }
     } else if (!navigator.geolocation) {
-        alert("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by this browser");
     } else {
         // Geolocation is supported, but user denied permission or there was an error acquiring the position
         const enableLocation = confirm("Please enable location services on your device to access weather information. Open location settings?");
         if (enableLocation) {
             // Open location settings based on the platform
             if (isAndroid) {
-                window.location.href = "https://www.android.com/location";
+                window.location.href = "settings://location";
             } else if (isIOS) {
                 window.location.href = "App-Prefs:root=LOCATION_SERVICES";
             }
