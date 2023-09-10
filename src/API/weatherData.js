@@ -111,50 +111,6 @@ async function getUserLocation() {
     }
 }
 
-// Function to prompt the user to enable location services on a mobile device
-// function EnableLocationServices() {
-//     const isAndroid = /Android/i.test(navigator.userAgent);
-//     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-//     if (isAndroid && !navigator.geolocation) {
-//         alert("Please enable location services on your device to access weather information.");
-//     } else if (isIOS && !navigator.geolocation) {
-//         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
-//         if (enableLocation) {
-//             window.location.href = "App-Prefs:Privacy";
-//         }
-//     }
-// }
-
-// function EnableLocationServices() {
-//     const isAndroid = /Android/i.test(navigator.userAgent);
-//     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-//     if (isAndroid) {
-//         if (!navigator.geolocation) {
-//             alert("Please enable location services on your device to access weather information.");
-//         } else {
-//             navigator.geolocation.getCurrentPosition(
-//                 () => {
-//                     // Location services are enabled
-//                     console.log("Location services are enabled on Android.");
-//                 },
-//                 (error) => {
-//                     // Location services are disabled or there was an error
-//                     alert("Please enable location services on your device to access weather information.");
-//                 }
-//             );
-//         }
-//     } else if (isIOS && !navigator.geolocation) {
-//         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
-//         if (enableLocation) {
-//             window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open privacy settings on iOS devices
-//         }
-//     } else if (!navigator.geolocation) {
-//         alert("Geolocation is not supported by this browser.");
-//     }
-// }
-
 function EnableLocationServices() {
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -178,29 +134,6 @@ function EnableLocationServices() {
         alert("Geolocation is not supported by this browser.");
     }
 }
-
-// function EnableLocationServices() {
-//     const isAndroid = /Android/i.test(navigator.userAgent);
-//     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-//     if (isAndroid && !navigator.geolocation) {
-//         alert("Please enable location services on your device to access weather information.");
-//     } else if (isIOS && !navigator.geolocation) {
-//         const enableLocation = confirm("Please enable location services on your device to access weather information. Enable now?");
-//         if (enableLocation) {
-//             const userAgent = navigator.userAgent.toLowerCase();
-//             if (userAgent.indexOf("safari") !== -1 && userAgent.indexOf("chrome") === -1) {
-//                 window.location.href = "prefs:root=Privacy&path=LOCATION"; // Open privacy settings on Safari
-//             } else {
-//                 window.location.href = "App-Prefs:root=LOCATION_SERVICES"; // Open location settings on other iOS browsers
-//             }
-//         }
-//     } else if (!navigator.geolocation) {
-//         alert("Geolocation is not supported by this browser.");
-//     } else {
-//         alert("Please enable location services on your device to access weather information.");
-//     }
-// }
 
 // Attach the event listener to the button element
 
