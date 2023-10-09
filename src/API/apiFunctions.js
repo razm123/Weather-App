@@ -126,7 +126,20 @@ function printCurrentDay(data, currentDayInt, forecastType) {
     const dt = new Date(currentDay);
     const dayInt = dt.getUTCDay();
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
     const getDay = dayNames[dt.getUTCDay()];
     const getMonth = monthNames[dt.getUTCMonth()];
     const getMonthDay = dt.getUTCDate();
