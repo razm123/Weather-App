@@ -27,65 +27,27 @@ export async function fetchLocation(city) {
 }
 
 // Function to handle the weather when a location is selected
-// async function awaitWeather(e) {
-//     const suggBox = document.querySelector(".autocom-box");
-
-//     const cityInput = document.getElementById("city");
-//     cityInput.value = e.target.textContent;
-//     const data = await fetchWeather(cityInput.value, "forecast");
-//     let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
-//     getData(data, weatherBoolean);
-//     let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
-//     document.title = currentCity.split(",")[0] + " Weather";
-
-//     localStorage.setItem("currentCity", currentCity);
-//     let icon = document.getElementById("favicon");
-//     icon.href = data.current.condition.icon;
-//     document.querySelector("form").reset();
-//     suggBox.classList.add("hidden");
-// }
-
 async function awaitWeather(e) {
     const suggBox = document.querySelector(".autocom-box");
-    const cityName = e.target.textContent; // Use the city name directly from the clicked suggestion
+
     const cityInput = document.getElementById("city");
-    cityInput.value = cityName;
+    cityInput.value = e.target.textContent;
+    const data = await fetchWeather(cityInput.value, "forecast");
+    let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
+    getData(data, weatherBoolean);
+    let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+    document.title = currentCity.split(",")[0] + " Weather";
 
-    try {
-        const data = await fetchWeather(cityName, "forecast");
-        let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
-        getData(data, weatherBoolean);
-        let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
-        document.title = currentCity.split(",")[0] + " Weather";
-
-        localStorage.setItem("currentCity", currentCity);
-        let icon = document.getElementById("favicon");
-        icon.href = data.current.condition.icon;
-        document.querySelector("form").reset();
-        suggBox.classList.add("hidden");
-    } catch (error) {
-        console.error("Error fetching weather data: ", error);
-        // Handle error (e.g., display an error message to the user)
-    }
+    let lat = data.location.lat;
+    let lon = data.location.lon;
+    let latLon = `${lat} ${lon}`;
+    localStorage.setItem("currentCity", currentCity);
+    localStorage.setItem("latLon", latLon);
+    let icon = document.getElementById("favicon");
+    icon.href = data.current.condition.icon;
+    document.querySelector("form").reset();
+    suggBox.classList.add("hidden");
 }
-
-// async function awaitWeather(e) {
-//     const suggBox = document.querySelector(".autocom-box");
-//     const cityId = e.target.dataset.cityId;
-//     const cityInput = document.getElementById("city");
-//     cityInput.value = e.target.textContent;
-//     const data = await fetchWeather(cityId, "forecast");
-//     let weatherBoolean = JSON.parse(localStorage.getItem("weatherBoolean"));
-//     getData(data, weatherBoolean);
-//     let currentCity = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
-//     document.title = currentCity.split(",")[0] + " Weather";
-
-//     localStorage.setItem("currentCity", currentCity);
-//     let icon = document.getElementById("favicon");
-//     icon.href = data.current.condition.icon;
-//     document.querySelector("form").reset();
-//     suggBox.classList.add("hidden");
-// }
 
 // Function to handle click event on the suggestion list
 export function clickList() {

@@ -8,6 +8,7 @@ export async function fetchWeather(city, forecast) {
         });
         if (response.ok) {
             data = await response.json();
+            console.log(data);
         } else {
             throw new Error("Please enter a valid city name");
         }

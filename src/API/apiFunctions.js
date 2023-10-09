@@ -189,8 +189,11 @@ function submitData() {
         document.title = currentCity.split(",")[0] + " Weather";
         let icon = document.getElementById("favicon");
         icon.href = data.current.condition.icon;
-
+        let lat = data.location.lat;
+        let lon = data.location.lon;
+        let latLon = `${lat} ${lon}`;
         localStorage.setItem("currentCity", currentCity);
+        localStorage.setItem("latLon", latLon);
         document.querySelector("form").reset();
         suggBox.classList.add("hidden");
     });
