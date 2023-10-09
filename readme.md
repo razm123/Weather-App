@@ -4,6 +4,7 @@
 -   Search bar with autocomplete suggestions through the location autocompletion service of the API
 ## Known bugs:
 - When selecting "Use my location" on apple products with location turned off, the app will not respond
+
 [Live Demo](https://razm123.github.io/Weather-App/)
 [![Preview](images/preview.png)](https://razm123.github.io/Weather-App/)
 
