@@ -4,4 +4,4 @@
 -   Search bar with autocomplete suggestions through the location autocompletion service of the API
 
 [Live Demo](https://razm123.github.io/Weather-App/)
-[![Preview](images/preview.png2)](https://razm123.github.io/Weather-App/)
+[![Preview](images/preview.png)](https://razm123.github.io/Weather-App/)
