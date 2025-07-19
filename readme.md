@@ -7,4 +7,3 @@
 
 [Live Demo](https://razm123.github.io/Weather-App/)
 [![Preview](images/preview.png)](https://razm123.github.io/Weather-App/)
-
