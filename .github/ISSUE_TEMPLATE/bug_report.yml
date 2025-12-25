@@ -1,53 +1,10 @@
-name: Bug Report 🐞
-description: Create a report to help us improve
-title: "[Bug]: "
-labels: ["bug", "triage"]
-assignees:
-  - razm123
-body:
-  - type: markdown
+- type: input
+    id: location
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
-  
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
-
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
+      label: Code Location (Permalink)
+      description: >-
+        Go to the file in this repo, click the line number (Shift+Click for range), 
+        press 'y' to get the permanent URL, and paste it here.
+      placeholder: https://github.com/razm123/workout-logger/blob/abc1234/src/main.cs#L15
     validations:
       required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      description: How urgent is this?
-      options:
-        - Low (Cosmetic)
-        - Medium (Annoying but functional)
-        - High (Broken feature)
-        - Critical (Crash / Data Loss)
-    validations:
-      required: true
-
-  - type: checkboxes
-    id: environment
-    attributes:
-      label: Environment
-      description: Where did this happen?
-      options:
-        - label: Windows
-        - label: Linux
-        - label: Mac
-        - label: Mobile (iOS/Android)
