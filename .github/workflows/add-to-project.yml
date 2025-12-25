@@ -1,0 +1,14 @@
+name: Add Issue to Project
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add_to_project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.5.0
+        with:
+          # Replace with your specific Project URL
+          project-url: https://github.com/users/razm123/projects/4
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
