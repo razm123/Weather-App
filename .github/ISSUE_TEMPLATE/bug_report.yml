@@ -52,7 +52,7 @@ body:
         - label: Mac
         - label: Mobile (iOS/Android)
 
-    - type: input
+  - type: input
     id: location
     attributes:
       label: Code Location (Permalink)
